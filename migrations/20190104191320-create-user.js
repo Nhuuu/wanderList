@@ -29,10 +29,6 @@ module.exports = {
       bio: {
         type: Sequelize.TEXT
       },
-      admin: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
-      },
       image: {
         type: Sequelize.TEXT
       },

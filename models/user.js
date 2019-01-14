@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
     username: DataTypes.STRING,
     dob: DataTypes.DATE,
     bio: DataTypes.TEXT,
-    admin: DataTypes.BOOLEAN,
     image: {
       type: DataTypes.TEXT,
       validate: {
