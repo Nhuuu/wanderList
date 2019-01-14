@@ -1,0 +1,20 @@
+<h1><%= user.firstname %>'s Profile</h1>
+
+<div class="row">
+	<div class="col s3">
+		<div>
+			<img src="<%= user.image %>">
+		</div>
+		<div>
+			<p><strong>Name: </strong><%= user.firstname %> <%= user.lastname %></p>
+			<p><strong>Display Name: </strong><%= user.username %></p>
+			<p><strong>User Status: </strong><%= user.admin ? 'Admin' : 'User' %></p>			
+			<p><strong>DOB: </strong><%= user.dob %></p>
+			<p><strong>Email: </strong><%= user.email %></p>
+		</div>
+	</div>
+	<div class="col s9">
+		<h3><%= user.firstname %>'s Bio</h3>
+		<p><%= user.bio %></p>
+	</div>
+</div>
