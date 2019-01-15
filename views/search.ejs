@@ -1,0 +1,36 @@
+<h1>Search page</h1>
+<!-- need method-override on this form to delete places from profile page. -->
+
+<form method="POST" action="/search">
+	<label for="search">Search</label>
+	<input type="submit" name="search" id="search">
+</form>
+
+<hr>
+
+<!-- Look at geocode example -->
+<h1>Display Search results</h1>
+
+<!-- <h1><%= place.predictions[0].description %></h1> -->
+<!-- place img -->
+
+
+<!-- display 20 attractions to add -->
+<!-- <ul>
+	<% results.forEach((r) => { %>
+		<li><%= r.city %>, <%= r.state %>: (<%= r.long %>, <%= r.lat %>)
+			<form method="POST" action="/add">
+				<input type="hidden" name="city" value="<%= r.city %>">
+				<input type="hidden" name="state" value="<%= r.state %>">
+				<input type="hidden" name="long" value="<%= r.long %>">
+				<input type="hidden" name="lat" value="<%= r.lat %>">
+				<input type="hidden" name="travelerId" value="<%= searchTerms.travelerId %>">
+				<input type="submit" value="Add to My WanderList">
+			</form>
+		</li>
+	<% }); %>
+</ul>
+
+
+
+
