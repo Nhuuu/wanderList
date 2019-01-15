@@ -15,15 +15,42 @@ router.post('/add', (req, res) => {
 
 })
 
-
-// GET all user's places, img, city, country
-router.get('/profile', (req, res) => {
-	res.send('profile works from places')
-	// db.places.findAll()
-	// .then((myPlaces) => {
-
-	// })
+// GET search route
+router.get('/search', (req, res) => {
+	res.render('search');
 })
+
+// POST search route, get query inputs from search region and display photo.
+router.post('/search', (req, res) => {
+ var placeUrl = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='+ req.body.search + '&types=(cities)&key='+ process.env.googleKey;
+ // var pointsOfInterestUrl = ''
+ request(placeUrl, (err, response, body) => {
+ 	var place = JSON.parse(body).predictions[0];
+ 	// var placeId = place.place_id;
+ 	// var placeIdUrl = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+ placeId + '&key=' + process.env.googleKey;
+ 	// request(placeIdUrl, (err, response, body) => {
+ 	// 	var getPhotos = JSON.parse(body).result.photos;
+ 		console.log(place);
+ 		res.render('search', { place: place })
+ 	});
+ });
+// });
+
+
+// GET show route
+// router.get('/profile/:id', (req, res) => {
+// 	db.place.find({
+// 		where: {id: req.params.id}
+// 	})
+// 	.then((place) =>{
+// 		if(!place) throw Error();
+// 		res.render('show', { place: place })
+// 	})
+// 	.catch((err) =>{
+// 		res.render('error')
+// 		console.log(err)
+// 	})
+// })
 
 
 // Delete route for places.
@@ -56,35 +83,6 @@ router.get('/profile', (req, res) => {
 // 	})
 // }
 
-
-
-
-// GET search route, get query inputs from search region and display photo.
-router.get('/search', (req, res) => {
- // res.send('searching...');
- var placesUrl = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='+ req.body.search + '&offset=3&types=(regions)&key=googleKey';
- var attractionsUrl = ''
- request(placesUrl, (err, response, body) => {
- 	var place = JSON.parse(body);
- 	res.render('search', { place: place })
- });
-});
-
-
-// GET show route
-// router.get('/profile/:id', (req, res) => {
-// 	db.place.find({
-// 		where: {id: req.params.id}
-// 	})
-// 	.then((place) =>{
-// 		if(!place) throw Error();
-// 		res.render('show', { place: place })
-// 	})
-// 	.catch((err) =>{
-// 		res.render('error')
-// 		console.log(err)
-// 	})
-// })
 
 
 
