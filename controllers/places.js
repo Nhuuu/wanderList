@@ -4,8 +4,8 @@ var express = require('express');
 var request = require('request');
 var router = express.Router();
 var yelp = require('yelp-fusion');
-var client = yelp.client(yelpKey);
-// var methodOverride = require('method-override');
+var client = yelp.client('yelpKey');
+var methodOverride = require('method-override');
 
 router.use(methodOverride('_method'));
 
@@ -18,6 +18,7 @@ router.post('/add', (req, res) => {
 
 // GET all user's places, img, city, country
 router.get('/profile', (req, res) => {
+	res.send('profile works from places')
 	// db.places.findAll()
 	// .then((myPlaces) => {
 
@@ -60,10 +61,10 @@ router.get('/profile', (req, res) => {
 
 // GET search route, get query inputs from search region and display photo.
 router.get('/search', (req, res) => {
- res.send('searching...');
+ // res.send('searching...');
  var placesUrl = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='+ req.body.search + '&offset=3&types=(regions)&key=googleKey';
  var attractionsUrl = ''
- request(placesUrl, (err, response, body){
+ request(placesUrl, (err, response, body) => {
  	var place = JSON.parse(body);
  	res.render('search', { place: place })
  });

@@ -17,6 +17,25 @@ var db = require('./models');
 // 	console.log('Error: ', err)
 // })
 
+// Create a user
+db.user.create({
+	firstname: 'Nhu',
+	lastname: 'Trinh',
+	email: 'nhu@nhu.com',
+	password: 'nhuuuuuu',
+	username: 'nhu',
+	dob: new Date('03/19/1987'),
+	bio: 'I am me.',
+	image: 'http://placekitten.com/200/300'
+})
+.then((createdUser) => {
+	console.log('Created user: ', createdUser.firstname);
+})
+.catch((err) => {
+	console.log('error: ', err)
+})
+
+
 
 // Create a place
 

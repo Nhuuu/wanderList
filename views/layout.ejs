@@ -17,9 +17,11 @@
 	      	<% if(!user) { %>
 	      		<li><a href="/auth/login">Log In</a></li>
 	        	<li><a href="/auth/signup">Sign Up</a></li>
+	        <% } else { %>
 	      		<li>Hello, <%= user.firstname %>!</li>
 	      		<li><a href="/profile">My List</a></li>
 	      		<li><a href="/auth/logout">Logout</a></li>
+	      	<% } %>
 	      </ul>
 	    </div>
   	</nav>
