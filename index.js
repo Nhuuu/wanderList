@@ -44,6 +44,6 @@ app.get('/', (req, res) => {
 // Controllers
 app.use('/auth', require('./controllers/auth'));
 app.use('/profile', require('./controllers/profile'));
-app.use('/places', require('./controllers/places'));
+app.use('/search', require('./controllers/search'));
 
 app.listen(3000);

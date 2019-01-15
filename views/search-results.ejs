@@ -1,6 +1,6 @@
 <!-- need method-override on this form to delete places from profile page. -->
 
-<form method="POST" action="/places/search">
+<form method="POST" action="/search">
 	<input type="text" name="search" placeholder="Where would you like to go?" id="search">
 	<input type="submit" value="Search">
 </form>
@@ -10,13 +10,15 @@
 <!-- Look at geocode example -->
 <h5>Display Search results below</h5>
 
-
-<!-- place img -->	
-<%= place.description %>
-
-<!-- display 20 attractions, for each with all hidden inputs. See geocode example -->
-
-
+<div class="container">
+	<div class="row">
+		<div class="col s12">
+			<%= place.description %>
+<!-- 			place img	
+			display 20 attractions, for each with all hidden inputs. See geocode example -->
+		</div>
+	</div>
+</div>
 
 
 
