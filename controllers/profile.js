@@ -7,27 +7,24 @@ var loggedIn = require('../middleware/loggedIn');
 
 
 
-// POST route for new places on the profile page and db. Find or create a place. See geocode example.
-// Coming from search page. 
+// POST route to add a place to a user's profile. Redirect to search-results. 
+// Need to make association with place/user.
 router.post('/add', (req, res) => {
-
+	db.place.findOrCreate({
+		where: {}
+	})
 })
 
-
-// GET all user's places, img, city, country
+// GET all user's places, img, city, country. db.placeUser.findAll()
+// Show image, city, country, current weather. 
+// Stretch goal, include Mapbox & markers.
 router.get('/', loggedIn, (req, res) => {
 	res.render('profile');
 });
 
-router.post('/', (req, res) => {
-	// db.places.findAll()
-	// .then((myPlaces) => {
-
-	// })
-})
 
 
-// GET show route
+// GET show route for 1 user's place and add notes functionality/association with place.
 // router.get('/:id', (req, res) => {
 // 	db.place.find({
 // 		where: {id: req.params.id}
