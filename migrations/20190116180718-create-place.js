@@ -12,10 +12,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       lng: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       lat: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       image: {
         type: Sequelize.TEXT

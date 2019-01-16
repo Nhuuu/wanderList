@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     placeId: DataTypes.INTEGER
   }, {});
   note.associate = function(models) {
-    // associations can be defined here
+    models.note.belongsTo(models.place);
   };
   return note;
 };

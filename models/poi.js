@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     placeId: DataTypes.INTEGER
   }, {});
   poi.associate = function(models) {
-    // associations can be defined here
+    models.poi.belongsTo(models.place);
   };
   return poi;
 };

@@ -5,7 +5,7 @@
 	<input type="submit" value="Search">
 </form>
 
-<% if(place.description) { %>
+<% if(place.description) {%>
 	<div class="slider">
 		<ul class="slides">
 			<% photos.forEach((img) => { %>
@@ -18,14 +18,12 @@
 		  	<% }); %>
 		</ul>
 	</div>
-	<form method="POST" action="/add">
-		<input type="hidden" name="city" value="<%= place.description %>">
-		<!-- Not sure if this image type will work -->
-		<input type="hidden" name="image" value="https://maps.googleapis.com/maps/api/place/photo?photoreference=<%= photos[0].photo_reference%>&sensor=false&maxheight=300&maxwidth=300&key=AIzaSyAf_uDTwDISX-UHVrOefuGDvDBnxlylfCk">
+	<form method="POST" action="/search/add" id="addPlace">
+		<input type="hidden" name="description" value="<%= place.description %>">
 		<input type="hidden" name="lng" value="<%= latLng.lng %>">
 		<input type="hidden" name="lat" value="<%= latLng.lat %>">
-		<input type="hidden" name="user" value="<%= place.userId %>">
-		<input type="submit" value="Add <%= place.description %> to my WanderList!">
+		<input type="hidden" name="userId" value="<%= user.id %>">
+		<input type="submit" id="submitplace" value="Add <%= place.description %> to My List!">
 	</form>
 	<div class="col s6 m3">
 		<h4 class="header">Points of Interest</h4>
@@ -44,16 +42,21 @@
 			      </ul>
 			    </div>
 			    <div class="card-action">
-			      <a href="<%= r.url %>">Website</a>
-			      <a href="#" class="btn-floating waves-effect waves-light red"><i class="material-icons">add_box</i></a>
+			      <a href="<%= r.url %>">Go to the Website!</a>
+		      		<form method="POST" action="/search/add-poi" class="addPoi">
+						<input type="hidden" name="name" value="<%= r.name %>">
+						<input type="hidden" name="categories" value="<%= r.categories[0].title %>">
+						<input type="hidden" name="rating" value="<%= r.rating %>">
+						<input type="hidden" name="url" value="<%= r.url %>">
+						<input type="hidden" name="image" value="<%= r.image_url %>">
+						<input type="hidden" name="placeId" value="<%= place.id %>">
+						<input type="submit" value="Add" id="submitpoi">
+					</form>
 			    </div>
 			  </div>
 			</div>
 		<% }); %>
 	</div>
-<% } else { %>
-	<h4>Search for a new place to travel!</h4>
-	<!-- Here is where I could put webcam inspiration -->
-<% }; %>
+<% } %>
 
 

@@ -7,7 +7,7 @@ router.get('/login', (req, res) => {
 	res.render('auth/login');
 });
 
-// LOOK into this one more
+
 router.post('/login', passport.authenticate('local', {
 	successRedirect: '/profile',
 	successFlash: 'Yay, login successful!',
@@ -16,7 +16,7 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 
-// ROUTE to display signup page. PreviousData: was added on all signup renders.
+// ROUTE to display signup page
 router.get('/signup', (req, res) => {
 	res.render('auth/signup', { previousData: null });
 });
@@ -25,15 +25,11 @@ router.get('/signup', (req, res) => {
 // POST route to sign up and create users
 router.post('/signup', (req, res) => {
 	if (req.body.password != req.body.passwordV){
-		// flash type error, msg
 		req.flash('error', 'Passwords must match!');
-		// render page they were just on. Need to call alerts > flash(error/success) to use in alerts.ejs. Or it will auto flash on redirect/refresh not on rendering.
 		res.render('auth/signup', { previousData: req.body, alerts: req.flash() }); 
 	} else {
-		// console.log(req.body);
 		db.user.findOrCreate({
 			where: { username: req.body.username },
-			// where username, create with req.body
 			defaults: req.body
 		})
 		.spread((user, created) => {
@@ -47,8 +43,6 @@ router.post('/signup', (req, res) => {
 			}
 		})
 		.catch((err) => {
-			// Sequelize errors is an array with type (different types of errors) and message. 
-			// Using type validation error because we set validations on the user for pw...etc.
 			if(err && err.errors){
 				console.log(err.errors)
 				err.errors.forEach((e) => {
@@ -67,7 +61,7 @@ router.post('/signup', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-	req.logout(); // logs me out of the session, inherent in passport
+	req.logout();
 	req.flash('success', 'Come back again!');
 	res.redirect('/');
 });

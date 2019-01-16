@@ -6,21 +6,16 @@ var router = express.Router();
 var yelp = require('yelp-fusion');
 var client = yelp.client(process.env.yelpKey);
 
-
+var loggedIn = require('../middleware/loggedIn');
 
 
 // GET search route
-router.get('/', (req, res) => {
-	if(req.user){
-		res.render('search-results', { place: '', photos: [] });
-	}
-	else {
-		res.render('auth/login');
-	}
+router.get('/', loggedIn, (req, res) => {
+	res.render('search-results', { place: '', photos: [] });
 })
 
 // POST search route, get location results - display photo and 20 attractions to add.
-router.post('/', (req, res) => {
+router.post('/', loggedIn, (req, res) => {
 	var placeUrl = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='+req.body.search+'&types=geocode&political&key='+process.env.googleKey;
 	request(placeUrl, (err, response, body) => {
 	 	var place = JSON.parse(body).predictions[0];
@@ -48,6 +43,69 @@ router.post('/', (req, res) => {
 		});
 	});
 });
+
+// POST route to add a place to a user's profile. 
+router.post('/add', (req, res) => {
+	db.place.findOrCreate({
+		where: {
+			description: req.body.description,
+			lng: req.body.lng,
+			lat: req.body.lat
+		},
+		defaults: req.body
+	})
+	.spread((place, created) => {
+		db.user.findOne({
+			where: { id: req.body.userId }
+		})
+		.then((user) => {
+			place.addUser(user)
+			.then((user) => {
+				console.log('association happened for user to place');
+			})
+			.catch((err) => {
+				console.log('problem adding association: ', err);
+			})
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+		res.send('success')
+		// res.redirect('/profile');
+	})
+	.catch((err) => {
+		console.log(err);
+		res.send('error');
+	});
+});		
+
+// POST route to add attractions and then redirect. need to create
+router.post('/add-poi', (req, res) => {
+	db.poi.findOrCreate({
+		where: {
+			name: req.body.name,
+			categories: req.body.categories,
+			image: req.body.image,
+			rating: req.body.rating,
+			url: req.body.url,
+			placeId: req.body.placeId
+		}
+	})
+	.spread((poi, created) => {
+		db.place.findOne()
+		.then((poi) => {
+			console.log('poi success')
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+		res.redirect('/profile');
+	})
+	.catch((err) => {
+		console.log(err)
+	})
+});
+
 
 
 

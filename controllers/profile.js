@@ -1,3 +1,4 @@
+var db = require('../models');
 var express = require('express');
 var router = express.Router();
 
@@ -5,43 +6,22 @@ var router = express.Router();
 var loggedIn = require('../middleware/loggedIn');
 
 
-// POST route to add a place to a user's profile. 
-router.post('/add', (req, res) => {
-	db.place.findOrCreate({
-		where: {
-			description: req.body.description,
-			image: req.body.image,
-			lng: req.body.lng,
-			lat: req.body.lat
-		}
-	})
-	.spread((place, created) => {
-		db.user.findById(req.body.userId) // check this one
-		.then((user) => {
-			place.addUser(user)
-			.then((user) => {
-				console.log('association happened');
-			})
-			.catch((err) => {
-				console.log('problem adding association');
-			})
-		})
-		res.redirect('/search-results');
-	})
-	.catch((err) => {
-		res.render('error');
-		console.log(err);
-	});
-});
 
-// GET all user's places, img, city, country. db.placeUser.findAll()
+// GET all user's places
 // Show image, city, country, current weather. 
 // Stretch goal, include Mapbox & markers.
 router.get('/', loggedIn, (req, res) => {
-	res.render('profile');
+	db.place.findAll({
+		where: {id: req.body.userId}
+	})
+	.then((addedPlaces) => {
+		res.render('profile', {addedPlaces: addedPlaces});
+	})
+	.catch((err) => {
+		console.log(err);
+		res.render('error');
+	})
 });
-
-
 
 
 
