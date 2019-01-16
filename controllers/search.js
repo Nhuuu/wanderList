@@ -5,12 +5,18 @@ var request = require('request');
 var router = express.Router();
 var yelp = require('yelp-fusion');
 var client = yelp.client(process.env.yelpKey);
-// var loggedIn = require('../middleware/loggedIn');
+
+
 
 
 // GET search route
 router.get('/', (req, res) => {
-	res.render('search-results', { place: '', photos: [] });
+	if(req.user){
+		res.render('search-results', { place: '', photos: [] });
+	}
+	else {
+		res.render('auth/login');
+	}
 })
 
 // POST search route, get location results - display photo and 20 attractions to add.

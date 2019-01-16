@@ -1,17 +1,29 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('placePois', {
+    return queryInterface.createTable('pois', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      placeId: {
-        type: Sequelize.INTEGER
+      name: {
+        type: Sequelize.STRING
       },
-      poiId: {
+      categories: {
+        type: Sequelize.STRING
+      },
+      image: {
+        type: Sequelize.TEXT
+      },
+      rating: {
+        type: Sequelize.DECIMAL
+      },
+      url: {
+        type: Sequelize.TEXT
+      },
+      placeId: {
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -25,6 +37,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('placePois');
+    return queryInterface.dropTable('pois');
   }
 };

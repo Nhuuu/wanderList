@@ -5,15 +5,34 @@ var router = express.Router();
 var loggedIn = require('../middleware/loggedIn');
 
 
-
-
-// POST route to add a place to a user's profile. Redirect to search-results. 
-// Need to make association with place/user.
+// POST route to add a place to a user's profile. 
 router.post('/add', (req, res) => {
 	db.place.findOrCreate({
-		where: {}
+		where: {
+			description: req.body.description,
+			image: req.body.image,
+			lng: req.body.lng,
+			lat: req.body.lat
+		}
 	})
-})
+	.spread((place, created) => {
+		db.user.findById(req.body.userId) // check this one
+		.then((user) => {
+			place.addUser(user)
+			.then((user) => {
+				console.log('association happened');
+			})
+			.catch((err) => {
+				console.log('problem adding association');
+			})
+		})
+		res.redirect('/search-results');
+	})
+	.catch((err) => {
+		res.render('error');
+		console.log(err);
+	});
+});
 
 // GET all user's places, img, city, country. db.placeUser.findAll()
 // Show image, city, country, current weather. 
@@ -24,7 +43,9 @@ router.get('/', loggedIn, (req, res) => {
 
 
 
-// GET show route for 1 user's place and add notes functionality/association with place.
+
+
+// GET show route for 1 user's place
 // router.get('/:id', (req, res) => {
 // 	db.place.find({
 // 		where: {id: req.params.id}
@@ -37,6 +58,12 @@ router.get('/', loggedIn, (req, res) => {
 // 		res.render('error')
 // 		console.log(err)
 // 	})
+// })
+
+
+// POST show route for notes functionality/association with place.
+// router.post('/:id', (req, res) => {
+
 // })
 
 
