@@ -20,8 +20,8 @@ router.post('/', loggedIn, (req, res) => {
 	request(placeUrl, (err, response, body) => {
 	 	var placeDetails = JSON.parse(body).predictions[0];
 	 	// console.log(place);
-	 	var placeId = placeDetails.place_id;
-	 	var placeIdUrl = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+placeId+'&key='+process.env.googleKey;
+	 	var placeDetailsId = placeDetails.place_id;
+	 	var placeIdUrl = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+placeDetailsId+'&key='+process.env.googleKey;
 	 	request(placeIdUrl, (err, response, body) => {
 	 		var latLng = JSON.parse(body).result.geometry.location;
 	 		var photosArr = JSON.parse(body).result.photos || [];
@@ -62,6 +62,7 @@ router.post('/add', (req, res) => {
 			place.addUser(user)
 			.then((user) => {
 				console.log('association happened for user to place');
+			
 			})
 			.catch((err) => {
 				console.log('problem adding association: ', err);
@@ -70,15 +71,15 @@ router.post('/add', (req, res) => {
 		.catch((err) => {
 			console.log(err);
 		})
-		res.send('success for place')
+		res.send({ placeId: place.id });
 	})
 	.catch((err) => {
 		console.log(err);
-		res.send('error');
+		res.send('error: on main place');
 	});
 });		
 
-// POST route to add attractions and then redirect. need to create
+// POST route to add points of interest.
 router.post('/add-poi', (req, res) => {
 	db.poi.findOrCreate({
 		where: {
@@ -102,7 +103,6 @@ router.post('/add-poi', (req, res) => {
 		console.log(err)
 	})
 });
-
 
 
 

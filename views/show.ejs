@@ -1,6 +1,14 @@
-<h1>Show each place and the attractions chosen based on ID here.</h1>
-
-<img src="<%= place.image %>">
-<%= place.description %>
-
-<!-- // Attractions -->
+<div class="container">
+	<h1><%= place.description %></h1>
+	<img src="<%= place.image %>">
+	<h3>Things to do:</h3>
+	<div>
+		<ul>
+			<% pointOfInterest.forEach((p) =>{ %>
+				<li>
+					<%= p.name %>
+				</li>
+			<% }); %>
+		</ul>
+	</div>
+</div>
