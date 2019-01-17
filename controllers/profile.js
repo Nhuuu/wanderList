@@ -34,13 +34,21 @@ router.get('/', loggedIn, (req, res) => {
 
 // GET show route for 1 user's place, points of interests associated + notes.
 router.get('/show/:id', (req, res) => {
-	db.place.find({
+	db.place.findOne({
 		where: {id: req.params.id}
 	})
 	.then((place) =>{
 		if(!place) throw Error();
-		res.render('show', { place: place })
-	})
+		db.poi.findAll({
+			where: {placeId: req.params.id}
+		})
+		.then((poi) => {
+			res.render('show', { place: place, poi: poi })
+		})
+		.catch((err) => {
+			res.send('error at adding pois to show')
+		})
+	}) 
 	.catch((err) =>{
 		res.render('error')
 		console.log(err)
