@@ -7,15 +7,21 @@ var loggedIn = require('../middleware/loggedIn');
 
 
 
-// GET all user's places
-// Show image, city, country, current weather. 
+// GET all user's places 
 // Stretch goal, include Mapbox & markers.
 router.get('/', loggedIn, (req, res) => {
-	db.place.findAll({
-		where: {id: req.body.userId}
-	})
-	.then((addedPlaces) => {
-		res.render('profile', {addedPlaces: addedPlaces});
+	db.place.findAll()
+	.then((allPlaces) => {
+		db.user.findOne({
+			where: {id: req.body.id}
+		})
+		.then((user) => {
+			res.render('profile', {allPlaces: allPlaces});
+		})
+		.catch((err) => {
+			console.log(err);
+			res.render('error');			
+		})
 	})
 	.catch((err) => {
 		console.log(err);

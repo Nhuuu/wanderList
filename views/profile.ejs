@@ -7,8 +7,14 @@
 	<div class="col s3">
 		<div>
 			<ul>
-				<% addedPlaces.forEach((p) => {%>
-					<li><%= p.description %></li>
+				<% allPlaces.forEach((p) => {%>
+					<li>
+						<img src="<%= p.image %>">
+						<%= p.description %>
+						<form method="POST" action="/profile/<%= p.id %>/?_method=DELETE">
+							<input type="submit" value="Delete">
+						</form>	
+					</li>
 				<% }); %>
 			</ul>
 		</div>

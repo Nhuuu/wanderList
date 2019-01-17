@@ -11,16 +11,16 @@ var loggedIn = require('../middleware/loggedIn');
 
 // GET search route
 router.get('/', loggedIn, (req, res) => {
-	res.render('search-results', { place: '', photos: [] });
+	res.render('search-results', { placeDetails: '', photos: [] });
 })
 
 // POST search route, get location results - display photo and 20 attractions to add.
 router.post('/', loggedIn, (req, res) => {
 	var placeUrl = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='+req.body.search+'&types=geocode&political&key='+process.env.googleKey;
 	request(placeUrl, (err, response, body) => {
-	 	var place = JSON.parse(body).predictions[0];
+	 	var placeDetails = JSON.parse(body).predictions[0];
 	 	// console.log(place);
-	 	var placeId = place.place_id;
+	 	var placeId = placeDetails.place_id;
 	 	var placeIdUrl = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+placeId+'&key='+process.env.googleKey;
 	 	request(placeIdUrl, (err, response, body) => {
 	 		var latLng = JSON.parse(body).result.geometry.location;
@@ -34,7 +34,7 @@ router.post('/', loggedIn, (req, res) => {
 			})
 			.then((data) => {
 				var results = data.jsonBody.businesses;
-				res.render('search-results', { place: place, latLng: latLng, photos: photosArr, results: results });
+				res.render('search-results', { placeDetails: placeDetails, latLng: latLng, photos: photosArr, results: results });
 			})
 			.catch((err) => {
 				console.log(err);
@@ -70,8 +70,7 @@ router.post('/add', (req, res) => {
 		.catch((err) => {
 			console.log(err);
 		})
-		res.send('success')
-		// res.redirect('/profile');
+		res.send('success for place')
 	})
 	.catch((err) => {
 		console.log(err);
@@ -93,13 +92,11 @@ router.post('/add-poi', (req, res) => {
 	})
 	.spread((poi, created) => {
 		db.place.findOne()
-		.then((poi) => {
-			console.log('poi success')
-		})
+		.then(() => {})
 		.catch((err) => {
 			console.log(err);
 		})
-		res.redirect('/profile');
+		res.send('success for point of interest')
 	})
 	.catch((err) => {
 		console.log(err)
