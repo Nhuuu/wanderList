@@ -1,16 +1,15 @@
 <h1><%= user.firstname %>'s WanderList</h1>
 
-
-<!-- <p>Would like to include city, country, current weather</p>
-<p>places are linked to show.id</p> --> 
+<!-- Show map -->
 <div class="row">
 	<div class="col s3">
 		<div>
 			<ul>
 				<% allPlaces.forEach((p) => {%>
 					<li>
-						<img src="<%= p.image %>">
+						<a href="/profile/show/<%= p.id %>"><img src="<%= p.image %>">
 						<%= p.description %>
+						</a>
 						<form method="POST" action="/profile/<%= p.id %>/?_method=DELETE">
 							<input type="submit" value="Delete">
 						</form>	
