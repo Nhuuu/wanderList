@@ -2,6 +2,9 @@ body, html {
 	height: 100%;
 }
 
+brand-logo {
+	text-align: left !important;
+}
 
 nav {
 	background-color: #ddd !important;
@@ -16,6 +19,10 @@ nav a {
 
 nav a:hover {
 	color: chartreuse;
+}
+
+h1 {
+	text-align: center;
 }
 
 .hero-image {
@@ -34,4 +41,24 @@ nav a:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   /*color: white;*/
+}
+
+
+.round-image {
+	border-radius: 50%;
+}
+
+.profile {
+	display: flex;
+	justify-content: space-between;
+}
+
+.profile-place-attr {
+	text-align: center;
+}
+
+.show-image {
+	height: 400px;
+	width: 900px;
+
 }
