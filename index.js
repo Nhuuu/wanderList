@@ -40,10 +40,11 @@ app.get('/', (req, res) => {
 	res.render('home');
 });
 
-
 // Controllers
 app.use('/auth', require('./controllers/auth'));
 app.use('/profile', require('./controllers/profile'));
 app.use('/search', require('./controllers/search'));
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
+
+
