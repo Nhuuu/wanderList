@@ -76,6 +76,13 @@ router.delete('/:id', (req, res) => {
 	})
 })
 
+// Post route for notes
+
+
+
+
+// Edit route for notes
+
 
 
 
