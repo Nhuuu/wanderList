@@ -55,7 +55,18 @@ router.get('/show/:id', loggedIn, (req, res) => {
 // router.post('/:id', (req, res) => {
 
 // })
-
+// Delete route for points of interest from places
+router.delete('/delete-poi/:id', (req, res) => {
+	db.poi.destroy({
+		where: {id: req.params.id}
+	})
+	.then((deletedPoi) => {
+		res.redirect('/profile/show/'+ req.body.placeId)
+	})
+	.catch((err) => {
+		console.log('error deleting point of interest from place')
+	})
+})
 
 // Delete route for places.
 router.delete('/:id', (req, res) => {
@@ -73,19 +84,7 @@ router.delete('/:id', (req, res) => {
 })
 
 
-// Delete route for points of interest from places. >>>fix this deleting, it currently deletes the entire place from me.
-router.delete('/show/:id', (req, res) => {
-	db.poi.destroy({
-		where: {id: req.params.id},
-		// include: [db.place, db.user]
-	})
-	.then((deletedPoi) => {
-		res.redirect('/profile/'+ place.id)
-	})
-	.catch((err) => {
-		console.log('error deleting point of interest from place')
-	})
-})
+
 
 
 

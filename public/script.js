@@ -9,13 +9,10 @@ $(document).ready(function(){
 		})
 		.done(function(data){
 			console.log(data, 'success')
-			//$('.place-id-input').val(data.placeId); 
 			document.querySelectorAll('.place-id-input').forEach((btn) => {
 				btn.value = data.placeId;
 			});
-			$('#submitplace').replaceWith('<h5>This place has been added to your list!</h5>');
-			$('.add-poi-btn').show();
-			// $('#submitplace').toggleClass('hidden');
+			$('#submitplace').replaceWith('<h5>Added to your list!</h5>');
 		})
 		.fail(function(err){
 			console.log(err, 'error')

@@ -4,20 +4,18 @@
 	<!-- Show map -->
 	<div class="row">
 		<div class="col s3">
-			<div>
-				<ul>
-					<% allPlaces.forEach((p) => {%>
-						<li>
-							<a href="/profile/show/<%= p.id %>"><img src="<%= p.image %>">
-							<%= p.description %>
-							</a>
-							<form method="POST" action="/profile/<%= p.id %>/?_method=DELETE">
-								<input type="submit" value="Delete">
-							</form>	
-						</li>
-					<% }); %>
-				</ul>
-			</div>
+			<ul>
+				<% allPlaces.forEach((p) => {%>
+					<li>
+						<a href="/profile/show/<%= p.id %>"><img src="<%= p.image %>">
+						<%= p.description %>
+						</a>
+						<form method="POST" action="/profile/<%= p.id %>/?_method=DELETE">
+							<input type="submit" value="Delete">
+						</form>	
+					</li>
+				<% }); %>
+			</ul>
 		</div>
 	</div>
 </div>
