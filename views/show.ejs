@@ -1,14 +1,31 @@
 <div class="container">
 	<h1><%= place.description %></h1>
 	<img src="<%= place.image %>">
-	<h3>Things to do:</h3>
-	<div>
-		<ul>
-			<% poi.forEach((p) =>{ %>
-				<li>
-					<%= p.name %>
-				</li>
-			<% }); %>
-		</ul>
+
+	<div class="col s6 m3">
+		<h4 class="header">Things to do:</h4>
+		<% poi.forEach((p) => { %>
+			<div class="card horizontal small">
+			  <div class="card-image">
+			    <img src="<%= p.image %>">
+			  </div>
+			  <div class="card-stacked">
+			    <div class="card-content">
+			      <ul>
+			      	<li>Name: <%= p.name %></li>
+			      	<li>Categories: <%= p.categories %></li>
+			      	<li>Rating: <%= p.rating %></li>
+			      	<!-- <li>Number of Reviews: <%= p.review_count %></li> -->
+			      </ul>
+			    </div>
+			    <div class="card-action">
+			      <a href="<%= p.url %>">Go to the Website!</a>
+			     	<form method="POST" action="/profile/<%= place.id %>/?_method=DELETE">
+						<input type="submit" value="Delete">
+					</form>	
+			    </div>
+			  </div>
+			</div>
+		<% }); %>
 	</div>
 </div>

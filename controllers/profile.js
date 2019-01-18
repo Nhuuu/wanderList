@@ -11,29 +11,24 @@ router.use(methodOverride('_method'));
 
 // GET all user's places >> include geocode map here
 router.get('/', loggedIn, (req, res) => {
-	db.place.findAll()
-	.then((allPlaces) => {
-		db.user.findOne({
-			where: {id: req.body.id}
-		})
-		.then((user) => {
-			res.render('profile', {allPlaces: allPlaces});
-		})
-		.catch((err) => {
-			console.log(err);
-			res.render('error');			
-		})
+	db.user.findOne({
+		where: {id: req.user.id},
+		include: [db.place]
+	})
+	.then((user) => {
+		console.log(user.places.length)
+		res.render('profile', {allPlaces: user.places});
 	})
 	.catch((err) => {
 		console.log(err);
-		res.render('error');
-	})
+		res.render('error');			
+	});
 });
 
 
 
-// GET show route for 1 user's place, points of interests associated + notes.
-router.get('/show/:id', (req, res) => {
+// GET show route for 1 user's saved place, points of interests associated & notes. 
+router.get('/show/:id', loggedIn, (req, res) => {
 	db.place.findOne({
 		where: {id: req.params.id}
 	})
@@ -52,8 +47,8 @@ router.get('/show/:id', (req, res) => {
 	.catch((err) =>{
 		res.render('error')
 		console.log(err)
-	})
-})
+	});
+});
 
 
 // POST show route for notes functionality/association with place.
@@ -78,19 +73,19 @@ router.delete('/:id', (req, res) => {
 })
 
 
-// Delete route for attractions from places
-// router.delete('/association', (req, res) => {
-// 	db.poiPlace.destroy({
-// 		where: {
-// 			placeId: req.body.placeId,
-// 			attractionId: req.body.attractionId
-// 		}
-// 	})
-// 	.then((deletedAssociation) => {
-// 		// res.redirect('/')
-// 		console.log(deletedAssociation)
-// 	})
-// }
+// Delete route for points of interest from places. >>>fix this deleting, it currently deletes the entire place from me.
+router.delete('/show/:id', (req, res) => {
+	db.poi.destroy({
+		where: {id: req.params.id},
+		// include: [db.place, db.user]
+	})
+	.then((deletedPoi) => {
+		res.redirect('/profile/'+ place.id)
+	})
+	.catch((err) => {
+		console.log('error deleting point of interest from place')
+	})
+})
 
 
 

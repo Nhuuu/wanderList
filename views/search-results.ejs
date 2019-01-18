@@ -28,7 +28,7 @@
 		<div class="col s6 m3">
 			<h4 class="header">Points of Interest</h4>
 			<% results.forEach((r) => { %>
-				<div class="card horizontal">
+				<div class="card horizontal small">
 				  <div class="card-image">
 				    <img src="<%= r.image_url %>">
 				  </div>
@@ -49,7 +49,7 @@
 							<input type="hidden" name="rating" value="<%= r.rating %>">
 							<input type="hidden" name="url" value="<%= r.url %>">
 							<input type="hidden" name="image" value="<%= r.image_url %>">
-							<input type="hidden" name="placeId" value="<%= place.id %>" class="place-id-input">
+							<input type="hidden" name="placeId" value="" class="place-id-input">
 							<input type="submit" value="Add" id="submitpoi" class="add-poi-btn">
 						</form>
 				    </div>

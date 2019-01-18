@@ -11,7 +11,7 @@ var loggedIn = require('../middleware/loggedIn');
 
 // GET search route
 router.get('/', loggedIn, (req, res) => {
-	res.render('search-results', { placeDetails: '', photos: [] });
+	res.render('search-results', { placeDetails: '', photos: [], placeId: '' });
 })
 
 // POST search route, get location results - display photo and 20 attractions to add.
@@ -39,7 +39,7 @@ router.post('/', loggedIn, (req, res) => {
 			.catch((err) => {
 				console.log(err);
 				res.render('error');
-			})
+			});
 		});
 	});
 });
@@ -50,19 +50,18 @@ router.post('/add', (req, res) => {
 		where: {
 			description: req.body.description,
 			lng: req.body.lng,
-			lat: req.body.lat
-		},
-		defaults: req.body
+			lat: req.body.lat,
+			image: req.body.image
+		}
 	})
 	.spread((place, created) => {
 		db.user.findOne({
-			where: { id: req.body.userId }
+			where: {id: req.body.userId}
 		})
 		.then((user) => {
 			place.addUser(user)
 			.then((user) => {
 				console.log('association happened for user to place');
-			
 			})
 			.catch((err) => {
 				console.log('problem adding association: ', err);
@@ -101,7 +100,7 @@ router.post('/add-poi', (req, res) => {
 	})
 	.catch((err) => {
 		console.log(err)
-	})
+	});
 });
 
 

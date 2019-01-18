@@ -7,18 +7,21 @@ $(document).ready(function(){
 			method: 'POST',
 			data: $(this).serialize()
 		})
-		// $('.add-poi-btn').toggleClass('hidden');
 		.done(function(data){
 			console.log(data, 'success')
-			$('.place-id-input').val(data.placeId); 
-			$('#submitplace').attr('disabled', 'disabled');
+			//$('.place-id-input').val(data.placeId); 
+			document.querySelectorAll('.place-id-input').forEach((btn) => {
+				btn.value = data.placeId;
+			});
+			$('#submitplace').replaceWith('<h5>This place has been added to your list!</h5>');
+			$('.add-poi-btn').show();
 			// $('#submitplace').toggleClass('hidden');
 		})
 		.fail(function(err){
 			console.log(err, 'error')
-		})
-	})
-})
+		});
+	});
+});
 
 
 $(document).ready(function(){
@@ -36,6 +39,7 @@ $(document).ready(function(){
 		})
 		.fail(function(err){
 			console.log(err, 'error')
-		})
-	})
-})
+		});
+	});
+});
+
