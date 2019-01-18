@@ -1,10 +1,11 @@
 <h1><%= user.firstname.toUpperCase() %>'S WANDERLIST</h1>
 <div class="container profile">
 	<% allPlaces.forEach((p) => {%>
-		<div class="profile-place-img">
+		<div>
 			<a href="/profile/show/<%= p.id %>"><img src="<%= p.image %>" class="round-image">
 			</a>
-			<h5 class="profile-place-attr"><%= p.description %></h5>
+
+			<h5 class="profile-place-desc"><%= p.description %></h5>
 			<form method="POST" action="/profile/<%= p.id %>/?_method=DELETE" class="profile-place-attr">
 				<input type="submit" value="Delete">
 			</form>	

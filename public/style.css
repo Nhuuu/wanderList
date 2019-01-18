@@ -43,22 +43,30 @@ h1 {
   /*color: white;*/
 }
 
+.profile {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	align-content: space-between;
+}
 
 .round-image {
 	border-radius: 50%;
+	height: 250px;
+	width: 250px;
+	justify-content: center;
 }
 
-.profile {
-	display: flex;
-	justify-content: space-between;
+.profile-place-image {
+	text-align: center;
 }
 
-.profile-place-attr {
+.profile-place-image {
 	text-align: center;
 }
 
 .show-image {
 	height: 400px;
-	width: 900px;
+	width: 100%;
 
 }

@@ -50,9 +50,9 @@ router.post('/add', (req, res) => {
 		where: {
 			description: req.body.description,
 			lng: req.body.lng,
-			lat: req.body.lat,
-			image: req.body.image
-		}
+			lat: req.body.lat
+		},
+		defaults: {image: req.body.image}
 	})
 	.spread((place, created) => {
 		db.user.findOne({
@@ -80,28 +80,29 @@ router.post('/add', (req, res) => {
 
 // POST route to add points of interest.
 router.post('/add-poi', (req, res) => {
-	db.poi.findOrCreate({
-		where: {
-			name: req.body.name,
-			categories: req.body.categories,
-			image: req.body.image,
-			rating: req.body.rating,
-			url: req.body.url,
-			placeId: req.body.placeId
-		}
+	db.place.findOne({
+		where: {id: req.body.placeId}
 	})
-	.spread((poi, created) => {
-		db.place.findOne({
-			where: {id: req.body.placeId}
+	.then(() => {
+		db.poi.findOrCreate({
+			where: {
+				name: req.body.name,
+				categories: req.body.categories,
+				image: req.body.image,
+				rating: req.body.rating,
+				url: req.body.url,
+				placeId: req.body.placeId
+			}
 		})
-		.then(() => {})
+		.spread((poi, created) => {
+			console.log('poi created');
+		})	
 		.catch((err) => {
-			console.log(err);
-		})
-		res.send('success for point of interest')
+			console.log(err, 'error created poi at place');
+		})	
 	})
 	.catch((err) => {
-		console.log(err)
+		console.log(err, 'error finding place');
 	});
 });
 
