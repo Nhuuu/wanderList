@@ -3,8 +3,6 @@ var express = require('express');
 var methodOverride = require('method-override');
 var router = express.Router();
 var loggedIn = require('../middleware/loggedIn');
-// var mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
-// var geocodingClient = mbxGeocoding({accessToken: process.env.geocodeToken});
 
 
 router.use(methodOverride('_method'));
@@ -16,7 +14,6 @@ router.get('/', loggedIn, (req, res) => {
 		include: [db.place]
 	})
 	.then((user) => {
-		console.log(user.places.length)
 		res.render('profile', {allPlaces: user.places});
 	})
 	.catch((err) => {
@@ -27,7 +24,7 @@ router.get('/', loggedIn, (req, res) => {
 
 
 
-// GET show route for 1 user's saved place, points of interests associated & notes. 
+// GET show route for 1 user's saved place, points of interests associated.
 router.get('/show/:id', loggedIn, (req, res) => {
 	db.place.findOne({
 		where: {id: req.params.id}
@@ -51,11 +48,7 @@ router.get('/show/:id', loggedIn, (req, res) => {
 });
 
 
-// POST show route for notes functionality/association with place.
-// router.post('/:id', (req, res) => {
-
-// })
-// Delete route for points of interest from places
+// Delete route for points of interest from places.
 router.delete('/delete-poi/:id', (req, res) => {
 	db.poi.destroy({
 		where: {id: req.params.id}

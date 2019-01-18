@@ -91,7 +91,9 @@ router.post('/add-poi', (req, res) => {
 		}
 	})
 	.spread((poi, created) => {
-		db.place.findOne()
+		db.place.findOne({
+			where: {id: req.body.placeId}
+		})
 		.then(() => {})
 		.catch((err) => {
 			console.log(err);
