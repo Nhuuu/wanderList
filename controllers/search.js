@@ -15,7 +15,7 @@ router.get('/', loggedIn, (req, res) => {
 })
 
 // GET search route, get location results - display photos and 20 attractions to add.
-router.get('/results', (req, res) => {
+router.get('/results', loggedIn, (req, res) => {
 	console.log(req.query)
 	var placeUrl = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='+req.query.search+'&types=geocode&political&key='+process.env.googleKey;
 	request(placeUrl, (err, response, placeBody) => {
