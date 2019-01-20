@@ -3,6 +3,8 @@ var express = require('express');
 var methodOverride = require('method-override');
 var router = express.Router();
 var loggedIn = require('../middleware/loggedIn');
+var mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+var geocodingClient = mbxGeocoding({accessToken: process.env.geocodeToken});
 
 
 router.use(methodOverride('_method'));
@@ -75,14 +77,6 @@ router.delete('/:id', (req, res) => {
 		})
 	})
 })
-
-// Post route for notes
-
-
-
-
-// Edit route for notes
-
 
 
 

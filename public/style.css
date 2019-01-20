@@ -1,5 +1,11 @@
 body, html {
 	height: 100%;
+	width: 100%;
+}
+
+* {
+	margin: 0;
+	padding: 0;
 }
 
 brand-logo {
@@ -7,7 +13,8 @@ brand-logo {
 }
 
 nav {
-	background-color: #ddd !important;
+	background: black !important;
+	color: white;
 	padding: .5em 0 0 .5em;
 }
 
@@ -17,30 +24,77 @@ nav a {
 	font-size: 28px;
 }
 
+
+/* change this */
 nav a:hover {
-	color: chartreuse;
+	color: chartreuse; 
 }
 
 h1 {
 	text-align: center;
 }
 
-.hero-image {
-	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("#");
-	height: 70%;
-	background-position: center;
-  	background-repeat: no-repeat;
-  	background-size: cover;
-  	position: relative;
+.load {
+	animation: slide 2s;
 }
 
-.hero-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /*color: white;*/
+
+.slider {
+	background-repeat: no-repeat;
+	background-size: cover !important;
+	background-position: center;
+	height: 100% !important;
+	animation: slide 30s infinite;
+}
+
+.content {
+	color: #fff;
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.principal {
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	letter-spacing: 5px;
+	text-align: center;
+}
+
+
+@keyframes slide {
+	0% {
+		background-image: url('https://s22380.pcdn.co/wp-content/uploads/2016-12-13_584f4e3742ffe_Zodiacal_Light.jpg');
+	}
+	20% {
+		background-image: url('https://s22380.pcdn.co/wp-content/uploads/2016-12-13_584f4e3742ffe_Zodiacal_Light.jpg');
+	}
+	20.01% {
+		background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/c4/Wanderlust_in_my_blood.jpg');
+	}
+	40% {
+		background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/c4/Wanderlust_in_my_blood.jpg');		
+	}
+	40.01% {
+		background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/cb/Wanderlust.jpg');		
+	}	
+	60% {
+		background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/cb/Wanderlust.jpg');		
+	}
+	60.01% {
+		background-image: url('https://s22380.pcdn.co/wp-content/uploads/2016-12-13_584f4e3742ffe_Zodiacal_Light.jpg');		
+	}
+	80% {
+		background-image: url('https://s22380.pcdn.co/wp-content/uploads/2016-12-13_584f4e3742ffe_Zodiacal_Light.jpg');		
+	}	
+	80.01% {
+		background-image: url('https://s22380.pcdn.co/wp-content/uploads/2016-12-13_584f4e3742ffe_Zodiacal_Light.jpg');		
+	}
+	100% {
+		background-image: url('https://s22380.pcdn.co/wp-content/uploads/2016-12-13_584f4e3742ffe_Zodiacal_Light.jpg');		
+	}
 }
 
 .profile {
@@ -68,4 +122,29 @@ h1 {
 	height: 400px;
 	width: 100%;
 
+}
+
+.main {
+	min-height: 100%;
+	padding-bottom: -60px;
+}
+
+#main-signup {
+	margin-top: 15px;
+	font-size: 2em;
+	box-shadow: 0 0 0 2px #fff inset!important;
+	background: 0 0;
+	color: #fff;
+	text-shadow: none !important;
+	padding: .5em;
+	border-radius: 10px;
+}
+
+#footer {
+	height: 60px;
+	background-color: black;
+	position: relative;
+	color: white;
+	margin-top: -40px;
+	clear: both;
 }
