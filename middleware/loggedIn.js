@@ -1,4 +1,3 @@
-// It's middleware so you need the 3 arguments
 module.exports = function(req, res, next){
 	if (req.user){
 		next();

@@ -90,10 +90,10 @@ h1 {
 		background-image: url('https://s22380.pcdn.co/wp-content/uploads/2016-12-13_584f4e3742ffe_Zodiacal_Light.jpg');		
 	}	
 	80.01% {
-		background-image: url('https://s22380.pcdn.co/wp-content/uploads/2016-12-13_584f4e3742ffe_Zodiacal_Light.jpg');		
+		background-image: url('https://s.abcnews.com/images/Travel/161103_vod_orig_travel_destinations_16x9_992.jpg');		
 	}
 	100% {
-		background-image: url('https://s22380.pcdn.co/wp-content/uploads/2016-12-13_584f4e3742ffe_Zodiacal_Light.jpg');		
+		background-image: url('https://s.abcnews.com/images/Travel/161103_vod_orig_travel_destinations_16x9_992.jpg');		
 	}
 }
 
@@ -140,6 +140,19 @@ h1 {
 	border-radius: 10px;
 }
 
+#signup-btn, #login-btn {
+	margin-top: 15px;
+	font-size: 1.5em;
+	background: rgba(0, 0, 0, 0.8);
+	box-shadow: 0 0 0 0 rgba(39, 41, 43, .15) inset;
+	text-shadow: none;
+	color: #fff;
+	padding: .5em;
+	border-radius: 10px;
+}
+
+
+
 #footer {
 	height: 60px;
 	background-color: black;
@@ -148,3 +161,9 @@ h1 {
 	margin-top: -40px;
 	clear: both;
 }
+
+/*fix this!*/
+/*#yelp-logo {
+	display: flex;
+	justify-content: flex-end;
+}*/

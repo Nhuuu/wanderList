@@ -29,24 +29,26 @@ router.post('/signup', (req, res) => {
 		res.render('auth/signup', { previousData: req.body, alerts: req.flash() }); 
 	} else {
 		db.user.findOrCreate({
-			where: { username: req.body.username },
+			where: { email: req.body.email },
 			defaults: req.body
 		})
-		.spread((user, created) => {
+		.spread((user, created) => { 
 			if(created){
-				req.flash('success', 'Yay! Good job! You signed up!');
-				res.redirect('/profile');
+				passport.authenticate('local', {
+					successRedirect: '/profile',
+					successFlash: 'Yay, login successful!',
+					failureRedirect: '/auth/login',
+					failureFlash: 'Invalid Credentials'
+				})(req, res, next);
 			}
 			else {
-				req.flash('error', 'Username already in use!');
+				req.flash('error', 'Email already in use!');
 				res.render('auth/signup', { previousData: req.body, alerts: req.flash() });
 			}
 		})
 		.catch((err) => {
 			if(err && err.errors){
-				console.log(err.errors)
 				err.errors.forEach((e) => {
-					console.log(e);
 					if(e.type == 'Validation error'){
 						req.flash('error', 'Validation Error: ', e.message);
 					}
@@ -62,7 +64,6 @@ router.post('/signup', (req, res) => {
 
 router.get('/logout', (req, res) => {
 	req.logout();
-	req.flash('success', 'Come back again!');
 	res.redirect('/');
 });
 

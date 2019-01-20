@@ -21,22 +21,11 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Your new password should be between 8 and 16 characters in length.'
         }
       }
-    },
-    username: DataTypes.STRING,
-    dob: DataTypes.DATE,
-    bio: DataTypes.TEXT,
-    image: {
-      type: DataTypes.TEXT,
-      validate: {
-        isUrl: {
-          msg: 'Aww, no pic? :('
-        }
-      }
-    } 
+    }, 
   }, {
-    hooks: {
+      hooks: {
       beforeCreate: ((pendingUser) => {
-        if(pendingUser) {
+        if(pendingUser && pendingUser.password) {
           var hash = bcrypt.hashSync(pendingUser.password, 12);
           pendingUser.password = hash;
         }
@@ -51,10 +40,3 @@ module.exports = (sequelize, DataTypes) => {
   };
   return user;
 };
-
-
-
-
-
-
-
