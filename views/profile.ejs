@@ -1,14 +1,14 @@
 <div class="container">
-	<h1><%= user.firstname.toUpperCase() %>'S WANDERLIST</h1>
+	<h2><%= user.firstname.toUpperCase() %>'S WANDERLIST</h2>
 	<hr>
 	<div class="profile">
 		<% allPlaces.forEach((p) => {%>
 			<div class="place-box">
 				<a href="/profile/show/<%= p.id %>"><img src="<%= p.image %>" class="round-image">
-					<h5><%= p.description %></h5>
+					<h5 class="place-link"><%= p.description %></h5>
 				</a>
 				<form method="POST" action="/profile/<%= p.id %>/?_method=DELETE" class="profile-place-attr">
-					<input type="submit" value="Delete">
+					<input class="delete-btns material-icons" type="submit" value="delete">
 				</form>	
 			</div>
 		<% }); %>

@@ -1,7 +1,9 @@
 <div class="container">
+	<h2>Search for a destination</h2>
+	<h5 class="description">Add a destination, then add attractions to plan your trip.</h5>
 	<form method="GET" action="/search/results">
-		<input type="text" name="search" placeholder="Where would you like to go? Enter the city/state or city/country." id="search">
-		<input class="material-icons" type="submit" value="search">
+		<input type="text" name="search" placeholder="Enter the city/state or city/country." id="search">
+		<input id="search-btn" type="submit" value="Search">
 	</form>
 
 	<% if(placeDetails.description) { %>
@@ -9,16 +11,16 @@
 			<ul class="slides">
 				<% photos.forEach((img) => { %>
 				      <li>
-				        <img src="https://maps.googleapis.com/maps/api/place/photo?photoreference=<%= img.photo_reference%>&sensor=false&maxheight=300&maxwidth=300&key=AIzaSyAf_uDTwDISX-UHVrOefuGDvDBnxlylfCk">
+				        <img class="search-image" src="https://maps.googleapis.com/maps/api/place/photo?photoreference=<%= img.photo_reference%>&sensor=false&maxheight=300&maxwidth=300&key=AIzaSyAf_uDTwDISX-UHVrOefuGDvDBnxlylfCk">
 				        <div class="caption">
-				          <h3><%= placeDetails.description %></h3>
+				          <h3 class="place-name"><%= placeDetails.description %></h3>
 				        </div>
 				      </li>
 			  	<% }); %>
 			</ul>
 		</div>
 		<% if(!place) { %> 
-			<form method="POST" action="/search/add" id="addPlace">
+			<form method="POST" action="/search/add" id="addPlace" class="add-btns">
 				<input type="hidden" name="description" value="<%= placeDetails.description %>">
 				<input type="hidden" name="lng" value="<%= latLng.lng %>">
 				<input type="hidden" name="lat" value="<%= latLng.lat %>">
