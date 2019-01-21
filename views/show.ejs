@@ -1,31 +1,34 @@
 <div class="container">
-	<h1><%= place.description.toUpperCase() %></h1>
+	<h2><%= place.description.toUpperCase() %></h2>
 	<img src="<%= place.image %>" class="show-image">
-
-	<div class="col s6 m3">
-		<h4 class="header">Things to do:</h4>
+	<h4 class="header">My list of attractions:</h4>
+	<div class="card-wrapper">
 		<% poi.forEach((p) => { %>
-			<div class="card horizontal small">
-			  <div class="card-image">
-			    <img src="<%= p.image %>">
-			  </div>
-			  <div class="card-stacked">
-			    <div class="card-content">
-			      <ul>
-			      	<li>Name: <%= p.name %></li>
-			      	<li>Categories: <%= p.categories %></li>
-			      	<li>Rating: <%= p.rating %></li>
-			      </ul>
+		  <div class="card">
+		    <div class="card-image waves-effect waves-block waves-light">
+		      <img class="activator card-img" src="<%= p.image %>" alt="Image of <%=p.name %> Coming Soon">
+		    </div>
+		    <div class="card-content">
+		      <span class="card-title activator grey-text text-darken-4"><%= p.name %><i class="material-icons right">more_vert</i></span>
+		  	<a href="<%= p.url %>">Go to the Website!</a>
+		     	<form method="POST" action="/profile/delete-poi/<%= p.id %>/?_method=DELETE">
+		     		<input type="hidden" name="placeId" value="<%= p.placeId %>">
+					<input class="delete-btns" type="submit" value="remove">
+				</form>	
+		    </div>
+		    <div class="card-reveal">
+		      <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+		      	<div class="card-left">
+					<strong>Name: </strong><%= p.name %>
+				</div>
+				<div class="card-left">
+			    	<strong>Categories: </strong><%= p.categories %>			
+				</div>
+			    <div class="card-left">
+			    	<strong>Rating: </strong><%= p.rating %>
 			    </div>
-			    <div class="card-action">
-			      	<a href="<%= p.url %>">Go to the Website!</a>
-			     	<form method="POST" action="/profile/delete-poi/<%= p.id %>/?_method=DELETE">
-			     		<input type="hidden" name="placeId" value="<%= p.placeId %>">
-						<input class="delete-btns material-icons" type="submit" value="delete">
-					</form>	
-			    </div>
-			  </div>
-			</div>
+		    </div>
+		  </div>
 		<% }); %>
 	</div>
 </div>

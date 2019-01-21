@@ -29,7 +29,7 @@ router.get('/results', loggedIn, (req, res) => {
 			client.search({
 				term: 'things to do',
 				location: req.query.search,
-				limit: 20,
+				limit: 50,
 				sort_by: 'rating'
 			})
 			.then((data) => {

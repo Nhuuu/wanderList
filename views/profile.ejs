@@ -8,7 +8,7 @@
 					<h5 class="place-link"><%= p.description %></h5>
 				</a>
 				<form method="POST" action="/profile/<%= p.id %>/?_method=DELETE" class="profile-place-attr">
-					<input class="delete-btns material-icons" type="submit" value="delete">
+					<input class="delete-btns" type="submit" value="remove">
 				</form>	
 			</div>
 		<% }); %>

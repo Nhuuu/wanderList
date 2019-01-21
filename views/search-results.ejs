@@ -1,6 +1,6 @@
 <div class="container">
 	<h2>Search for a destination</h2>
-	<h5 class="description">Add a destination, then add attractions to plan your trip.</h5>
+	<h5>Add a destination, then add attractions to plan your trip.</h5>
 	<form method="GET" action="/search/results">
 		<input type="text" name="search" placeholder="Enter the city/state or city/country." id="search">
 		<input id="search-btn" type="submit" value="Search">
@@ -20,32 +20,35 @@
 			</ul>
 		</div>
 		<% if(!place) { %> 
-			<form method="POST" action="/search/add" id="addPlace" class="add-btns">
+			<form method="POST" action="/search/add" id="addPlace">
 				<input type="hidden" name="description" value="<%= placeDetails.description %>">
 				<input type="hidden" name="lng" value="<%= latLng.lng %>">
 				<input type="hidden" name="lat" value="<%= latLng.lat %>">
 				<input type="hidden" name="image" value="https://maps.googleapis.com/maps/api/place/photo?photoreference=<%= photos[0].photo_reference%>&maxheight=300&maxwidth=300&key=AIzaSyAf_uDTwDISX-UHVrOefuGDvDBnxlylfCk">
 				<input type="hidden" name="userId" value="<%= user.id %>">
-				<input type="submit" value="Add <%= placeDetails.description %> to My List!">
+				<input type="submit" value="ADD <%= placeDetails.description.toUpperCase() %> TO MY LIST!" class="add-place-btn">
 			</form>
  		<% } %> 
-
-		<div class="col s6 m3">
-			<h4 class="header">Points of Interest</h4>
-			<% results.forEach((r) => { %>
-				<div class="card horizontal small">
-				  <div class="card-image">
-				    <img src="<%= r.image_url %>">
-				  </div>
-				  <div class="card-stacked">
-				    <div class="card-content">
-				      <ul>
-				      	<li>Name: <%= r.name %></li>
-				      	<li>Categories: <%= r.categories[0].title %></li>
-				      	<li>Rating: <%= r.rating %></li>
-				      </ul>
-				    </div>
-				    <div class="card-action">
+		<div>
+			<h5 class="header">Add attractions:</h5>
+			<div class="card-wrapper">
+				<% results.forEach((r) => { %>
+			      <div class="card card-left">
+			        <div class="card-image">
+			          <img class="card-img" src="<%= r.image_url %>" alt="Image of <%= r.name %> Coming Soon">
+			        </div>
+			        <div class="card-content">
+				      	<div class="card-left">
+							<strong>Name: </strong><%= r.name %>
+						</div>
+						<div class="card-left">
+					    	<strong>Categories: </strong><%= r.categories[0].title %>			
+						</div>
+					    <div class="card-left">
+					    	<strong>Rating: </strong><%= r.rating %>
+					    </div>
+			        </div>
+			        <div class="card-action">
 				      <a href="<%= r.url %>">Go to the Website!</a>
 				      	<% if(place) { %>
 				      		<form method="POST" action="/search/add-poi" class="addPoi">
@@ -58,10 +61,16 @@
 								<input type="submit" value="Add" id="submitpoi" class="add-poi-btn">
 							</form>
 						<% } %>
-				    </div>
-				  </div>
-				</div>
-			<% }); %>
+			        </div>
+			      </div>
+			    <% }); %>
+			</div>
 		</div>
 	<% } %>
 </div>
+
+
+
+
+
+        

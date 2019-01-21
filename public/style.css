@@ -30,9 +30,9 @@ nav a {
 }
 
 
-/* change this */
+
 nav a:hover {
-	color: chartreuse; 
+	color: orange; 
 }
 
 .account-btns {
@@ -146,6 +146,10 @@ nav a:hover {
 	font-family: 'Raleway', cursive;
 }
 
+#main-signup:hover {
+	color: orange;
+}
+
 #signup-btn, #login-btn, #search-btn {
 	margin: 20px 0;
 	font-size: 1.5em;
@@ -178,31 +182,83 @@ nav a:hover {
 	margin-right: 10px;
 }
 
-h2, h5 {
+h2, h5, h4 {
 	font-family: 'Raleway', cursive;
 	padding-bottom: 10px;
+}
+
+.alert {
+	background: grey !important;
+	max-height: 150px;
 }
 
 #search {
 	margin-top: 40px;
 }
 
-.add-btns {
-
+.add-place-btn {
+	margin-top: 20px;
+	font-size: 1em;
+	border-color: orange;
+	padding: 1em;
+	border-radius: 10px;
+	font-family: 'Raleway', cursive;
 }
 
-.delete-btns
+strong {
+	color: orange;
+}
 
+.add-poi-btn {
+	font-size: 1em;
+	color: orange;
+	padding: .5em;
+	border-radius: 10px;
+	font-family: 'Raleway', cursive;
+	display: inline-block;
+}
+
+.delete-btns {
+	font-size: 1em;
+	background: rgba(0, 0, 0, 0.8);
+	box-shadow: 0 0 0 0 rgba(39, 41, 43, .15) inset;
+	color: lightgrey;
+	padding: .5em;
+	border-radius: 10px;
+	font-family: 'Raleway', cursive;
+}
+
+.card-img {
+	height: 250px;
+}
+
+.card {
+	width: 300px;
+	height: auto;
+	margin: 20px !important;
+}
+.card-action {
+	display: flex;
+	justify-content: space-between;
+}
+
+.card-left {
+	text-align: left !important;
+}
+
+.search-image {
+	background-color: rgba(0, 0, 0, 0.8);
+}
 .place-name {
-	color: navy;
+	color: white;
 	font-family: 
 	text-align: left;
 	margin-left: 10px;
-	font-family: 'Raleway Dots', cursive;	
+	font-family: 'Raleway', cursive;	
 }
 
 .place-link {
-	color: navy;
+	color: orange;
 }
 
 #main-text{
@@ -220,6 +276,8 @@ h2, h5 {
 	font-family: 'Shadows Into Light Two', cursive;
 }
 
-.description {
-
+.card-wrapper {
+	display: flex;
+	justify-content: space-around;
+	flex-flow: row wrap;
 }
