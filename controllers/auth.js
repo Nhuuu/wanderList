@@ -10,7 +10,6 @@ router.get('/login', (req, res) => {
 
 router.post('/login', passport.authenticate('local', {
 	successRedirect: '/profile',
-	successFlash: 'Yay, login successful!',
 	failureRedirect: '/auth/login',
 	failureFlash: 'Invalid Credentials'
 }));
@@ -36,7 +35,6 @@ router.post('/signup', (req, res, next) => {
 			if(created){
 				passport.authenticate('local', {
 					successRedirect: '/profile',
-					successFlash: 'Yay, login successful!',
 					failureRedirect: '/auth/login',
 					failureFlash: 'Invalid Credentials'
 				})(req, res, next);

@@ -11,7 +11,7 @@
 		    <div class="card-content">
 		      <span class="card-title activator grey-text text-darken-4"><%= p.name %><i class="material-icons right">more_vert</i></span>
 		  	<a href="<%= p.url %>">Go to the Website!</a>
-		     	<form method="POST" action="/profile/delete-poi/<%= p.id %>/?_method=DELETE">
+		     	<form method="POST" action="/myList/delete-poi/<%= p.id %>/?_method=DELETE">
 		     		<input type="hidden" name="placeId" value="<%= p.placeId %>">
 					<input class="delete-btns" type="submit" value="remove">
 				</form>	

@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER
   }, {});
   placeUser.associate = function(models) {
-    // associations can be defined here
+    models.placeUser.belongsToMany(models.poi, {through: 'placeUserPoi'})
   };
   return placeUser;
 };

@@ -6,7 +6,7 @@ var loggedIn = require('../middleware/loggedIn');
 
 router.use(methodOverride('_method'));
 
-
+// GET profile route
 router.get('/', loggedIn, (req, res) => {
 	db.user.findOne({
 		where: {id: req.user.id},
@@ -42,7 +42,7 @@ router.put('/edit/:id', (req, res) => {
 	.catch((err) => {
 		console.log(err);
 		res.render('error')
-	})
+	});
 });
 
 

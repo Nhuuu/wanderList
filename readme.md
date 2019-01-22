@@ -97,7 +97,10 @@ Target user for this app are travel enthusiasts who need guidance on what to do 
 | `POST`   | `/search/add`        | adds place tp user                       			             |
 | `POST`   | `/search/add-poi`    | adds point of interest to place                                  |
 | `GET`    | `/profile`           | display's user profile.                                          |
-|    |     | Edit user's profile                                 |   
+| `GET`    | `/profile/edit`      | Show edit page for profile                                 			 |   
+| `PUT`    | `/profile/edit/:id`  | edits user's profile                                 			 |
+
+
 
 * Models
 

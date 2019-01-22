@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   poi.associate = function(models) {
     models.poi.belongsTo(models.place);
-    models.poi.belongsToMany(models.user, {through: 'poiUser'})
+    models.poi.belongsToMany(models.placeUser, {through: 'placeUserPoi'})
   };
   return poi;
 };

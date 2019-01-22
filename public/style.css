@@ -173,7 +173,8 @@ ul {
 	font-family: 'Raleway Dots', cursive;
 }
 
-#footer-left {
+/*check if i need these*/
+#footer-left { 
 	margin-left: 10px;
 }
 
@@ -286,10 +287,6 @@ strong {
 	height: 400px;
 	width: 400px;
 	margin-top: 20px;
-}
-
-.edit-profile {
-
 }
 
 .edit-btn {

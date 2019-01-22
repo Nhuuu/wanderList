@@ -47,12 +47,15 @@ router.get('/show/:id', loggedIn, (req, res) => {
 });
 
 
-// Delete route for points of interest from places.
+// Delete route for points of interest from places from user.
 router.delete('/delete-poi/:id', (req, res) => {
 	db.poi.destroy({
 		where: {id: req.params.id}
 	})
 	.then((deletedPoi) => {
+		db.placeUserPoi.destroy({
+			where: {poiId: req.params.id}
+		})
 		res.redirect('/myList/show/'+ req.body.placeId)
 	})
 	.catch((err) => {
