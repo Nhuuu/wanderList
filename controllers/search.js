@@ -91,6 +91,7 @@ router.post('/add', (req, res) => {
 	});
 });		
 
+
 // POST route to add points of interest to place.
 router.post('/add-poi', (req, res) => {
 	db.placeUser.findOne({
@@ -109,7 +110,17 @@ router.post('/add-poi', (req, res) => {
 			}		
 		})
 		.spread((poi, created) => {
-			console.log('association happened for poi to placeUser');		
+			db.place.findOne({
+				where: {id: req.body.placeId}
+			})
+			.then((place) => {
+				console.log('association happened for poi to placeUser');
+				res.redirect('/search/results?search='+place.description.toLowerCase());
+			})
+			.catch((err) => {
+				console.log(err);
+				res.render('error');
+			})		
 		})
 		.catch((err) => {
 			console.log(err);
