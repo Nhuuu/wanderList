@@ -82,20 +82,22 @@ Target user for this app are travel enthusiasts who need guidance on what to do 
 
 | CRUD     | Route                | Function                                                         |
 |----------|----------------------|------------------------------------------------------------------|
-| `GET`    | `/`                  | home page                                     |
+| `GET`    | `/`                  | home page                                                        |
 | `GET`    |  `/auth/login`       | renders login page                                               |
 | `POST`   | `/auth/login`        | signs in existing user                                           |
 | `GET`    | `/auth/signup`       | renders sign up page                                             |
 | `POST`   | `/auth/signup`       | creates new user in database                                     |
 | `GET`    | `/auth/logout`       | logs out user                                                    | 
-| `GET`    | `/profile`            | loads all user's places                                        |
-| `GET`    | `/show/:id`        | loads individual place                                           |
-| `DELETE`   | `/profile/delete-poi/:id`            |deletes point of interest from place                       |
-| `DELETE` | `/profile/:id`        | deletes place from user           |
-| `GET`    | `/search`     | get the search-results page      |
-| `GET`    | `/search/results`   | runs query using Google and Yelp API based on user input |
-| `POST`   | `/search/add`          | adds place tp user                               |
-| `post` | `/search/add-poi`      | adds point of interest to place                                      
+| `GET`    | `/myList`            | loads all user's places                                          |
+| `GET`    | `/show/:id`          | loads individual place                                           |
+| `DELETE` | `/myList/delete-poi/:id`|deletes point of interest from place                           |
+| `DELETE` | `/myList/:id`        | deletes place from user           								 |                             
+| `GET`    | `/search`     		  | get the search-results page      								 |
+| `GET`    | `/search/results`    | runs query using Google and Yelp API based on user input         |
+| `POST`   | `/search/add`        | adds place tp user                       			             |
+| `POST`   | `/search/add-poi`    | adds point of interest to place                                  |
+| `GET`    | `/profile`           | display's user profile.                                          |
+|    |     | Edit user's profile                                 |   
 
 * Models
 

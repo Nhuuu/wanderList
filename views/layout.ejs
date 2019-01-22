@@ -12,19 +12,18 @@
 </head>
 <body>
   	<nav>
-	    <div class="nav-wrapper">
-	      <a href="/" class="brand-logo">wanderlist</a>
-	      <ul class="right">
-	      	<% if(!user) { %>
-	      		<li><a href="/auth/login">LOG IN</a></li>
-	        	<li><a href="/auth/signup">SIGN UP</a></li>
-	        <% } else { %>
-	      		<li><a href="/search">SEARCH</a></li>
-	      		<li><a href="/profile">MY LIST</a></li>
-	      		<li><a href="/auth/logout">LOGOUT</a></li>
-	      	<% } %>
-	      </ul>
-	    </div>
+      <a href="/" class="left">wanderlist</a>
+      <ul>
+      	<% if(!user) { %>
+      		<li><a href="/auth/login">LOG IN</a></li>
+        	<li><a href="/auth/signup">SIGN UP</a></li>
+        <% } else { %>
+      		<li><a href="/search">SEARCH</a></li>
+      		<li><a href="/profile">PROFILE</a></li>
+      		<li><a href="/myList">MY LIST</li>
+      		<li><a href="/auth/logout">LOGOUT</a></li>
+      	<% } %>
+      </ul>
   	</nav>
 	<div class="main">
 		<% include partials/alerts %>
@@ -32,10 +31,18 @@
 	</div>	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<script>
-  		 document.addEventListener('DOMContentLoaded', function() {
+  		document.addEventListener('DOMContentLoaded', function() {
     		var elems = document.querySelectorAll('.slider');
     		var instances = M.Slider.init(elems);
   		});
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.datepicker');
+        var instances = M.Datepicker.init(elems, {
+          autoClose: true,
+          maxDate: new Date(),
+          yearRange: [1920, 2019]
+        });
+      });
 	</script>
 	<script
   src="https://code.jquery.com/jquery-3.3.1.min.js"

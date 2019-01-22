@@ -1,16 +1,12 @@
-<div class="container">
-	<h2><%= user.firstname.toUpperCase() %>'S WANDERLIST</h2>
-	<hr>
-	<div class="profile">
-		<% allPlaces.forEach((p) => {%>
-			<div class="place-box">
-				<a href="/profile/show/<%= p.id %>"><img src="<%= p.image %>" class="round-image">
-					<h5 class="place-link"><%= p.description %></h5>
-				</a>
-				<form method="POST" action="/profile/<%= p.id %>/?_method=DELETE" class="profile-place-attr">
-					<input class="delete-btns" type="submit" value="remove">
-				</form>	
-			</div>
-		<% }); %>
-	</div>
+<div class="container profile">
+	<img src="<%= user.image %>" class="profile-pic">
+	<h2><%= user.firstname %> <%= user.lastname %></h2>
+	<h5><strong>Email: </strong><%= user.email %></h5>
+	<h5><strong>Birthday: </strong><%= user.dob %></h5>
+	<h5><strong>Bio: </strong><%= user.bio %></h5>
+	<a href="/profile/edit" class="edit-profile">
+		<i class="material-icons edit-btn">edit</i>
+	</a>
+</form>
 </div>
+

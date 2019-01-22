@@ -35,6 +35,22 @@
 					<input type="password" id="passwordV" name="passwordV" placeholder="Retype your password" required>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col s9 input-field">
+					<label for="photo">Profile Image URL</label>
+					<input type="url" id="photo" name="image" placeholder="Enter a URL for your photo" value="<%= previousData ? previousData.image : '' %>">
+				</div>
+				<div class="col s3 input-field">
+					<label for="dob">Date of Birth</label>
+					<input type="text" class="datepicker" id="dob" name="dob" placeholder="Enter your date of birth" value="<%= previousData ? previousData.dob : '' %>">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 input-field">
+					<label for="bio">Bio</label>
+					<input type="text" id="bio" name="bio" placeholder="Tell us about yourself." value="<%= previousData ? previousData.bio : '' %>">
+				</div>
+		</div>			
 			<div>
 				<button id="signup-btn" type="submit">Sign Up</button>
 			</div>

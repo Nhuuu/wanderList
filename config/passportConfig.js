@@ -1,7 +1,5 @@
-var passport = require('passport');
-// Class object to call a new function on 
+var passport = require('passport'); 
 var LocalStrategy = require('passport-local').Strategy;
-
 var db = require('../models');
 
 // Provide serialize/deserialize functions so we can store user in session
@@ -40,3 +38,6 @@ passport.use(new LocalStrategy({
 
 
 module.exports = passport;
+
+
+

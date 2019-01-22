@@ -23,7 +23,7 @@ router.get('/signup', (req, res) => {
 
 
 // POST route to sign up and create users
-router.post('/signup', (req, res) => {
+router.post('/signup', (req, res, next) => {
 	if (req.body.password != req.body.passwordV){
 		req.flash('error', 'Passwords must match!');
 		res.render('auth/signup', { previousData: req.body, alerts: req.flash() }); 

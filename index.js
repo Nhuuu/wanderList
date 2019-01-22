@@ -42,8 +42,9 @@ app.get('/', (req, res) => {
 
 // Controllers
 app.use('/auth', require('./controllers/auth'));
-app.use('/profile', require('./controllers/profile'));
+app.use('/myList', require('./controllers/myList'));
 app.use('/search', require('./controllers/search'));
+app.use('/profile', require('./controllers/profile'));
 
 app.listen(process.env.PORT || 3000);
 

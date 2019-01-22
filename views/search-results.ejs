@@ -19,7 +19,7 @@
 			  	<% }); %>
 			</ul>
 		</div>
-		<% if(!place) { %> 
+<!-- This is where an if stmt goes -->
 			<form method="POST" action="/search/add" id="addPlace">
 				<input type="hidden" name="description" value="<%= placeDetails.description %>">
 				<input type="hidden" name="lng" value="<%= latLng.lng %>">
@@ -28,7 +28,7 @@
 				<input type="hidden" name="userId" value="<%= user.id %>">
 				<input type="submit" value="ADD <%= placeDetails.description.toUpperCase() %> TO MY LIST!" class="add-place-btn">
 			</form>
- 		<% } %> 
+<!-- This is where it ends  -->
 		<div>
 			<h5 class="header">Add attractions:</h5>
 			<div class="card-wrapper">

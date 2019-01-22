@@ -1,0 +1,16 @@
+<div class="container">
+	<h2><%= user.firstname.toUpperCase() %>'S WANDERLIST</h2>
+	<hr>
+	<div class="myList">
+		<% allPlaces.forEach((p) => {%>
+			<div class="place-box">
+				<a href="/myList/show/<%= p.id %>"><img src="<%= p.image %>" class="round-image">
+					<h5 class="place-link"><%= p.description %></h5>
+				</a>
+				<form method="POST" action="/myList/<%= p.id %>/?_method=DELETE">
+					<input class="delete-btns" type="submit" value="remove">
+				</form>	
+			</div>
+		<% }); %>
+	</div>
+</div>

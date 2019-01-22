@@ -11,16 +11,11 @@ body, html {
 	padding: 0;
 }
 
-.nav-wrapper {
-	text-align: left !important;
-	font-family: 'Raleway Dots', cursive;
-}
-
 nav {
+	font-family: 'Raleway Dots', cursive;
 	background: black !important;
 	color: white;
 	padding: .5em .5em 0 .5em;
-
 }
 
 nav a {
@@ -29,11 +24,15 @@ nav a {
 	font-size: 28px;
 }
 
-
-
 nav a:hover {
 	color: orange; 
 }
+
+ul {
+	display: flex;
+	justify-content: flex-end;
+}
+
 
 .account-btns {
 	color: orange;
@@ -102,7 +101,7 @@ nav a:hover {
 	}
 }
 
-.profile {
+.myList {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: space-around;
@@ -150,7 +149,7 @@ nav a:hover {
 	color: orange;
 }
 
-#signup-btn, #login-btn, #search-btn {
+#signup-btn, #login-btn, #search-btn, #update-btn {
 	margin: 20px 0;
 	font-size: 1.5em;
 	background: rgba(0, 0, 0, 0.8);
@@ -280,4 +279,19 @@ strong {
 	display: flex;
 	justify-content: space-around;
 	flex-flow: row wrap;
+}
+
+.profile-pic {
+	border-radius: 50%;
+	height: 400px;
+	width: 400px;
+	margin-top: 20px;
+}
+
+.edit-profile {
+
+}
+
+.edit-btn {
+	color: grey;
 }
