@@ -16,7 +16,7 @@ router.get('/', loggedIn, (req, res) => {
 
 // GET results from API; location results - display photos and 50 attractions to add.
 router.get('/results', loggedIn, (req, res) => {
-	if (req.body) { //check on this
+	if (req.body) { 
 		var placeUrl = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='+req.query.search+'&types=geocode&political&key='+process.env.googleKey;
 		request(placeUrl, (err, response, placeBody) => {
 		 	var placeDetails = JSON.parse(placeBody).predictions[0];
@@ -92,71 +92,36 @@ router.post('/add', (req, res) => {
 });		
 
 // POST route to add points of interest to place.
-// router.post('/add-poi', (req, res) => {
-// 	console.log("REQ.BODY.placeId", req.body.placeId)
-// 	db.user.findOne({
-// 		where: {id: req.user.id},
-// 		include: [db.place]
-// 	})
-// 	.then((user) => {
-// 		db.poi.findOrCreate({
-// 			where: {
-// 				name: req.body.name,
-// 				categories: req.body.categories,
-// 				image: req.body.image,
-// 				rating: req.body.rating,
-// 				url: req.body.url,
-// 				placeId: req.body.placeId
-// 			}
-// 		})
-// 		.spread((poi, created) => {
-// 			console.log('poi created');
-// 			res.redirect('/search/results?search='+place.description.toLowerCase());
-// 		})	
-// 		.catch((err) => {
-// 			console.log(err, 'error created poi at place');
-// 		})		
-// 	})
-// 	.catch((err) => {
-// 		console.log(err, 'error finding place');
-// 	});
-// });
-
 router.post('/add-poi', (req, res) => {
-	db.poi.findOrCreate({
-		where: {
-			name: req.body.name,
-			categories: req.body.categories,
-			image: req.body.image,
-			rating: req.body.rating,
-			url: req.body.url,
-			placeId: req.body.placeId
-		}
+	db.placeUser.findOne({
+		where: {userId: req.user.id}
 	})
-	.spread((poi, created) => {
-		db.placeUser.findOne({
-			where: {id: req.user.id},
-			include: [db.place]
+	.then((placeUser) => {
+		db.poi.findOrCreate({
+			where: {
+				name: req.body.name,
+				categories: req.body.categories,
+				image: req.body.image,
+				rating: req.body.rating,
+				url: req.body.url,
+				numReviews: req.body.numReviews,
+				placeId: req.body.placeId
+			}		
 		})
-		.then((user) => {
-			poi.addPlaceUser(placeUser)
-			.then((placeUser) => {
-				console.log('association happened for poi to place');
-				res.redirect('/search/results?search='+place.description.toLowerCase());
-			})
-			.catch((err) => {
-				console.log('problem adding association: ', err);
-			})
+		.spread((poi, created) => {
+			console.log('association happened for poi to placeUser');		
 		})
 		.catch((err) => {
 			console.log(err);
+			res.render('error');
 		})
 	})
 	.catch((err) => {
 		console.log(err);
-		res.send('error: on main place');
+		res.render('error');
 	});
-});	
+ });
+	
 
 
 module.exports = router;

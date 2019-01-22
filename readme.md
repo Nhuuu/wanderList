@@ -70,12 +70,16 @@ Target user for this app are travel enthusiasts who need guidance on what to do 
 
 ### Sprint 3
 * Built out CSS further for subpages
-
-### Sprint 4
+* Built out edit profile functionality.
 
 
 #### Backlog
-
+* Known issue: deleting a point of interest, deletes off of every user that has it.
+	* Once fixed, the add buttons on the search page can be fixed for flow.
+* Include calendar for when user is estimated to go.
+* Scrape data on the best times to go for each destination.
+* Include a map API with markers for destinations.
+* Include checkboxes instead of add buttons to add all points of interest.
 
 ## Routes and Models
 * Routes
@@ -104,11 +108,14 @@ Target user for this app are travel enthusiasts who need guidance on what to do 
 
 * Models
 
-| Model   | Schema                                                                   | Assocations                                    |
-|---------|--------------------------------------------------------------------------|------------------------------------------------------------------|
-| Place | description, lng, lat, image                           | Has many poi(points of interest), belongs to many users                                |                                          |
-| Poi(points of interest)   | name, categories, image, rating, url, placeId | Belongs to places                                        |
-| User    | firstname, lastname, email, password                     | Belongs to many places
+| Model   | Schema         	| Assocations                                                          |
+|--------------------------------------------------------------------------------------------------|
+| Place   | description, lng, lat, image | Has many poi(points of interest), belongs to many users |
+| Poi(points of interest)| name, categories, image, rating, url, numReviews, placeId | Belongs to many placeUsers|
+| User    | firstname, lastname, email, password, image, bio, dob                    | Belongs to many places|
+| placeUser | userId, placeId                                                        | Belongs to many pois|
+| placeUserPoi | placeUserId, poiId                                                  | 
+
 
 ## Steps to Set Up
 If you'd like to set this project up on your own local server:
@@ -123,7 +130,7 @@ If you'd like to set this project up on your own local server:
 
 
 ## Credits 
-* Here's where to put main-page photo sources.
+* Main-image sources: wikimedia.org, abcnews.com
 
 
 
