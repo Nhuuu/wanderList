@@ -38,7 +38,7 @@ router.get('/results', loggedIn, (req, res) => {
 					})
 					.then((place) => {
 						var results = data.jsonBody.businesses;
-						res.render('search-results', { placeDetails: placeDetails, latLng: latLng, photos: photosArr, results: results, place: place });
+						res.render('search-results', { placeDetails: placeDetails, latLng: latLng, photos: photosArr, results: results, place: place});
 					})
 					.catch((err) => {
 						console.log('error getting place API info');
@@ -94,44 +94,51 @@ router.post('/add', (req, res) => {
 
 // POST route to add points of interest to place.
 router.post('/add-poi', (req, res) => {
-	db.placeUser.findOne({
-		where: {userId: req.user.id}
+	db.poi.findOrCreate({
+		where: {
+			name: req.body.name,
+			categories: req.body.categories,
+			image: req.body.image,
+			rating: req.body.rating,
+			url: req.body.url,
+			numReviews: req.body.numReviews,
+			placeId: req.body.placeId
+		}
 	})
-	.then((placeUser) => {
-		db.poi.findOrCreate({
-			where: {
-				name: req.body.name,
-				categories: req.body.categories,
-				image: req.body.image,
-				rating: req.body.rating,
-				url: req.body.url,
-				numReviews: req.body.numReviews,
-				placeId: req.body.placeId
-			}		
+	.spread((poi, created) => {
+		db.placeUser.findOne({
+			where: {userId: req.user.id}
 		})
-		.spread((poi, created) => {
-			db.place.findOne({
-				where: {id: req.body.placeId}
-			})
-			.then((place) => {
-				console.log('association happened for poi to placeUser');
-				res.redirect('/search/results?search='+place.description.toLowerCase());
+		.then((placeUser) => {
+			poi.addPlaceUser(placeUser)
+			.then((placeUser) => {
+				db.place.findOne({
+					where: {id: req.body.placeId}
+				})
+				.then((place) => {
+					console.log('association happened for poi to placeUser');
+					res.redirect('/search/results?search='+place.description.toLowerCase());					
+				})
+				.catch((err) => {
+					console.log(err);
+					res.render('error');					
+				})
 			})
 			.catch((err) => {
 				console.log(err);
 				res.render('error');
-			})		
+			})
 		})
 		.catch((err) => {
 			console.log(err);
 			res.render('error');
-		})
+		})		
 	})
 	.catch((err) => {
 		console.log(err);
 		res.render('error');
 	});
- });
+});
 	
 
 

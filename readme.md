@@ -74,8 +74,7 @@ Target user for this app are travel enthusiasts who need guidance on what to do 
 
 
 #### Backlog
-* Known issue: deleting a point of interest, deletes off of every user that has it.
-	* Once fixed, the add buttons on the search page can be fixed for flow.
+* Add buttons need to be adjusted for flow.
 * Include calendar for when user is estimated to go.
 * Scrape data on the best times to go for each destination.
 * Include a map API with markers for destinations.
@@ -114,7 +113,7 @@ Target user for this app are travel enthusiasts who need guidance on what to do 
 | Poi(points of interest)| name, categories, image, rating, url, numReviews, placeId | Belongs to many placeUsers|
 | User    | firstname, lastname, email, password, image, bio, dob                    | Belongs to many places|
 | placeUser | userId, placeId                                                        | Belongs to many pois|
-| placeUserPoi | placeUserId, poiId                                                  | 
+| placeUserPoi | placeUserPlaceId, poiId                                                  | 
 
 
 ## Steps to Set Up
