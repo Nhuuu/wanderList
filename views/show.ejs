@@ -1,11 +1,7 @@
 <div class="container">
 	<h2><%= place.description.toUpperCase() %></h2>
 	<img src="<%= place.image %>" class="show-image">
-	<% if(!poi.id){ %>
-	<h4 class="header">Nothing to do here yet, add some attractions!</h4>
-	<% } else { %>
 	<h4 class="header">Things I want to do:</h4>
-	<% } %>
 	<div class="card-wrapper">
 		<% poi.forEach((p) => { %>
 		  <div class="card">
