@@ -79,6 +79,7 @@ Target user for this app are travel enthusiasts who need guidance on what to do 
 * Scrape data on the best times to go for each destination.
 * Include a map API with markers for destinations.
 * Include checkboxes instead of add buttons to add all points of interest.
+* Share itinerary with friends functionality.
 
 ## Routes and Models
 * Routes

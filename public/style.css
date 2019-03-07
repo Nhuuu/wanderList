@@ -82,10 +82,10 @@ ul {
 		background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/c4/Wanderlust_in_my_blood.jpg');		
 	}
 	40.01% {
-		background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/cb/Wanderlust.jpg');		
+		background-image: url('https://upload.wikimedia.org/wikipedia/commons/b/ba/El_Capricho%2C_Rillo_de_Gallo%2C_Guadalajara%2C_Espa%C3%B1a%2C_2017-05-25%2C_DD_18.jpg');		
 	}	
 	60% {
-		background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/cb/Wanderlust.jpg');		
+		background-image: url('https://upload.wikimedia.org/wikipedia/commons/b/ba/El_Capricho%2C_Rillo_de_Gallo%2C_Guadalajara%2C_Espa%C3%B1a%2C_2017-05-25%2C_DD_18.jpg');		
 	}
 	60.01% {
 		background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/c2/Lincoln%27s_Rock%2C_Wentworth_Falls%2C_Australia_%28Unsplash%29.jpg');		
@@ -187,7 +187,7 @@ h2, h5, h4 {
 }
 
 .alert {
-	background: grey !important;
+	background: orange !important;
 	max-height: 150px;
 }
 

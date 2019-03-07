@@ -23,31 +23,41 @@ router.get('/', loggedIn, (req, res) => {
 });
 
 
-// GET show route for 1 user's saved place, points of interests associated.
-router.get('/show/:id', loggedIn, (req, res) => {
-	db.place.findOne({
-		where: {id: req.params.id}
+// GET show route for 1 user's saved place, points of interests associated. 
+router.get('/show/:idx', loggedIn, (req, res) => {
+	db.user.findOne({
+		where: {id: req.user.id}
 	})
-	.then((place) =>{
-		if(!place) throw Error();
-		db.poi.findAll({
-			where: {placeId: req.params.id}
+	.then(user => {
+		db.place.findOne({
+			where: {id: req.params.idx}
 		})
-		.then((poi) => {
-			res.render('show', { place: place, poi: poi })
+		.then((place) =>{
+			if(!place) throw Error(); 
+			db.poi.findAll({
+				where: {placeId: req.params.idx}
+			})
+			.then((poi) => {
+				res.render('show', { place: place, poi: poi })
+			})
+			.catch((err) => {
+				console.log('err finding pois to show', err)
+				res.render('error')
+			})
+		}) 
+		.catch((err) =>{
+			res.render('error')
+			console.log(err)
 		})
-		.catch((err) => {
-			res.send('error at adding pois to show')
-		})
-	}) 
-	.catch((err) =>{
-		res.render('error')
+	})
+	.catch(err => {
 		console.log(err)
-	});
+		res.render('error')
+	})
 });
 
-
-// Delete route for points of interest from places from user.
+// This one needs work
+// Delete route for points of interest from places from user. >>>
 router.delete('/delete-poi/:id', (req, res) => {
 	db.poi.destroy({
 		where: {id: req.params.id}
@@ -63,6 +73,7 @@ router.delete('/delete-poi/:id', (req, res) => {
 	})
 })
 
+// Check this to see if deletes from all users.
 // Delete route for places.
 router.delete('/:id', (req, res) => {
 	db.place.destroy({
