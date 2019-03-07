@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   user.associate = function(models) {
-    // models.user.belongsToMany(models.place, {through: 'placeUser'});
+    models.user.belongsToMany(models.place, {through: 'placeUserPoi'});
     models.user.belongsToMany(models.poi, {through: 'placeUserPoi'});
   };
   user.prototype.validPassword = function(typedPassword){

@@ -106,7 +106,8 @@ router.post('/add-poi', (req, res) => {
 				rating: req.body.rating,
 				url: req.body.url,
 				numReviews: req.body.numReviews,
-				placeId: req.body.placeId
+				placeId: req.body.placeId,
+				userId: req.user.id
 			}
 		})
 		.spread((poi, created) => {
@@ -116,21 +117,10 @@ router.post('/add-poi', (req, res) => {
 				}
 			})
 			.then((place) => {
-				console.log(poi.id, 'before addpoi')
 				place.addPoi(poi)
 				.then((poi) => {
-					console.log(poi.id, 'after add poi')
-					// db.place.findOne({
-					// 	where: {id: req.body.placeId}
-					// })
-					// .then((place) => {
-						console.log('association happened for poi to placeUser');
-						res.redirect('/search/results?search='+place.description.toLowerCase());					
-					// })
-					// .catch((err) => {
-					// 	console.log(err);
-					// 	res.render('error');					
-					// })
+					console.log('association happened for poi to placeUser');
+					res.redirect('/search/results?search='+place.description.toLowerCase());					
 				})
 				.catch((err) => {
 					console.log(err);

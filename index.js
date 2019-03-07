@@ -46,6 +46,6 @@ app.use('/myList', require('./controllers/myList'));
 app.use('/search', require('./controllers/search'));
 app.use('/profile', require('./controllers/profile'));
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 5000);
 
 

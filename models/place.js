@@ -7,8 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.TEXT
   }, {});
   place.associate = function(models) {
-    models.place.hasMany(models.poi);
-    // models.place.belongsToMany(models.user, {through: 'placeUser'});
+    models.place.belongsToMany(models.poi, {through: 'placeUserPoi'});
     models.place.belongsToMany(models.user, {through: 'placeUserPoi'});
   };
   return place;

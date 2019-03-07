@@ -30,12 +30,15 @@ router.get('/show/:idx', loggedIn, (req, res) => {
 	})
 	.then(user => {
 		db.place.findOne({
-			where: {id: req.params.idx}
+			where: {id: req.params.idx},
 		})
 		.then((place) =>{
 			if(!place) throw Error(); 
 			db.poi.findAll({
-				where: {placeId: req.params.idx}
+				where: {
+					placeId: req.params.idx,
+					userId: req.user.id
+				}
 			})
 			.then((poi) => {
 				res.render('show', { place: place, poi: poi })
