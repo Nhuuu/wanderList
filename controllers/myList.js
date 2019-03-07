@@ -59,7 +59,7 @@ router.get('/show/:idx', loggedIn, (req, res) => {
 	})
 });
 
-// This one needs work
+
 // Delete route for points of interest from places from user. >>>
 router.delete('/delete-poi/:id', (req, res) => {
 	db.poi.destroy({
@@ -67,7 +67,10 @@ router.delete('/delete-poi/:id', (req, res) => {
 	})
 	.then((deletedPoi) => {
 		db.placeUserPoi.destroy({
-			where: {poiId: req.params.id}
+			where: {
+				poiId: req.params.id,
+				userId: req.user.id
+			}
 		})
 		res.redirect('/myList/show/'+ req.body.placeId)
 	})
@@ -76,19 +79,30 @@ router.delete('/delete-poi/:id', (req, res) => {
 	})
 })
 
-// Check this to see if deletes from all users.
+
 // Delete route for places.
 router.delete('/:id', (req, res) => {
-	db.place.destroy({
-		where: {id: req.params.id}
+	db.user.findOne({
+		where: {id: req.user.id}
 	})
-	.then((deletedPlace) => {
-		db.placeUser.destroy({
-			where: {placeId: req.params.id}
-		})
+	.then(user => {
+		db.placeUserPoi.destroy({
+			where: {
+				placeId: req.params.id,
+				userId: req.user.id
+			}
+		})	
 		.then((deletedAssociation) => {
 			res.redirect('/myList');
 		})
+		.catch(err => {
+			console.log(err)
+			res.render('error')
+		})
+	})
+	.catch(err => {
+		console.log(err)
+		res.render('error')
 	})
 })
 
