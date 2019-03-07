@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const placeUserPoi = sequelize.define('placeUserPoi', {
-    placeUserId: DataTypes.INTEGER,
+    placeUserPlaceId: DataTypes.INTEGER,
     poiId: DataTypes.INTEGER
   }, {});
   placeUserPoi.associate = function(models) {

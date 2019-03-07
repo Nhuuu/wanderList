@@ -94,93 +94,64 @@ router.post('/add', (req, res) => {
 
 // POST route to add points of interest to place.
 router.post('/add-poi', (req, res) => {
-	db.poi.findOrCreate({
-		where: {
-			name: req.body.name,
-			categories: req.body.categories,
-			image: req.body.image,
-			rating: req.body.rating,
-			url: req.body.url,
-			numReviews: req.body.numReviews,
-			placeId: req.body.placeId
-		}
+	db.user.findOne({
+		where: {id: req.user.id}
 	})
-	.spread((poi, created) => {
-		db.placeUser.findOne({
-			where: {userId: req.user.id}
+	.then(user => {
+		db.poi.findOrCreate({
+			where: {
+				name: req.body.name,
+				categories: req.body.categories,
+				image: req.body.image,
+				rating: req.body.rating,
+				url: req.body.url,
+				numReviews: req.body.numReviews,
+				placeId: req.body.placeId
+			}
 		})
-		.then((placeUser) => {
-			poi.addPlaceUser(placeUser)
+		.spread((poi, created) => {
+			db.placeUser.findOne({
+				where: {
+					userId: req.user.id,
+					placeId: req.body.placeId
+				}
+			})
 			.then((placeUser) => {
-				db.place.findOne({
-					where: {id: req.body.placeId}
-				})
-				.then((place) => {
-					console.log('association happened for poi to placeUser');
-					res.redirect('/search/results?search='+place.description.toLowerCase());					
+				poi.addPlaceUser(placeUser)
+				.then((placeUser) => {
+					db.place.findOne({
+						where: {id: req.body.placeId}
+					})
+					.then((place) => {
+						console.log('association happened for poi to placeUser');
+						res.redirect('/search/results?search='+place.description.toLowerCase());					
+					})
+					.catch((err) => {
+						console.log(err);
+						res.render('error');					
+					})
 				})
 				.catch((err) => {
 					console.log(err);
-					res.render('error');					
+					res.render('error');
 				})
 			})
 			.catch((err) => {
 				console.log(err);
 				res.render('error');
-			})
+			})		
 		})
-		.catch((err) => {
+		.catch(err => {
 			console.log(err);
 			res.render('error');
-		})		
+		})
 	})
+
 	.catch((err) => {
 		console.log(err);
 		res.render('error');
 	});
 });
-	
-
-// router.post('/add-poi', (req, res) => {
-// 	db.poi.findOrCreate({
-// 		where: {
-// 			name: req.body.name,
-// 			categories: req.body.categories,
-// 			image: req.body.image,
-// 			rating: req.body.rating,
-// 			url: req.body.url,
-// 			numReviews: req.body.numReviews,
-// 			placeId: req.body.placeId
-// 		}
-// 	})
-// 	.spread((poi, created) => {
-// 		db.placeUser.findOne({
-// 			where: {
-// 				placeId: req.body.placeId,
-// 				userId: req.user.id
-// 			}
-// 		})
-// 		.then(placeUser => {
-// 			poi.addPlaceUser(placeUser)
-// 			.then((placeUser) => {
-// 				console.log('association happened for poi to placeUser');
-// 				res.redirect('/search/results?search='+place.description.toLowerCase());
-// 			})
-// 			.catch((err) => {
-// 				console.log(err);
-// 				res.render('error');					
-// 			})
-// 		})			
-// 		.catch((err) => {
-// 			console.log(err);
-// 			res.render('error');
-// 		})
-// 	})
-// 	.catch((err) => {
-// 		console.log(err);
-// 		res.render('error');
-// 	})		
-// });
 
 
 module.exports = router;
