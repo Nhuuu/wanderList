@@ -110,26 +110,27 @@ router.post('/add-poi', (req, res) => {
 			}
 		})
 		.spread((poi, created) => {
-			db.placeUser.findOne({
+			db.place.findOne({
 				where: {
-					userId: req.user.id,
-					// placeId: req.body.placeId
+					id: req.body.placeId
 				}
 			})
-			.then((placeUser) => {
-				poi.addPlaceUser(placeUser)
-				.then((placeUser) => {
-					db.place.findOne({
-						where: {id: req.body.placeId}
-					})
-					.then((place) => {
+			.then((place) => {
+				console.log(poi.id, 'before addpoi')
+				place.addPoi(poi)
+				.then((poi) => {
+					console.log(poi.id, 'after add poi')
+					// db.place.findOne({
+					// 	where: {id: req.body.placeId}
+					// })
+					// .then((place) => {
 						console.log('association happened for poi to placeUser');
 						res.redirect('/search/results?search='+place.description.toLowerCase());					
-					})
-					.catch((err) => {
-						console.log(err);
-						res.render('error');					
-					})
+					// })
+					// .catch((err) => {
+					// 	console.log(err);
+					// 	res.render('error');					
+					// })
 				})
 				.catch((err) => {
 					console.log(err);
@@ -146,7 +147,6 @@ router.post('/add-poi', (req, res) => {
 			res.render('error');
 		})
 	})
-
 	.catch((err) => {
 		console.log(err);
 		res.render('error');

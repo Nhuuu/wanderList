@@ -20,6 +20,7 @@
 			</ul>
 		</div>
 
+		<% if(!place){ %>
 			<form method="POST" action="/search/add" id="addPlace">
 				<input type="hidden" name="description" value="<%= placeDetails.description %>">
 				<input type="hidden" name="lng" value="<%= latLng.lng %>">
@@ -28,7 +29,7 @@
 				<input type="hidden" name="userId" value="<%= user.id %>">
 				<input type="submit" value="ADD <%= placeDetails.description.toUpperCase() %> TO MY LIST!" class="add-place-btn">
 			</form>
-
+		<% } %>
 		<div>
 			<h5 class="header">Add attractions:</h5>
 			<div class="card-wrapper">
@@ -53,18 +54,18 @@
 			        </div>
 			        <div class="card-action">
 				      <a href="<%= r.url %>">Go to the Website!</a>
-				      	<% if(place) { %>
-				      		<form method="POST" action="/search/add-poi" class="addPoi">
-								<input type="hidden" name="name" value="<%= r.name %>">
-								<input type="hidden" name="categories" value="<%= r.categories[0].title %>">
-								<input type="hidden" name="rating" value="<%= r.rating %>">
-								<input type="hidden" name="numReviews" value="<%= r.review_count %>">	
-								<input type="hidden" name="url" value="<%= r.url %>">
-								<input type="hidden" name="image" value="<%= r.image_url %>">
-								<input type="hidden" name="placeId" value="<%= place.id %>" class="place-id-input">
-								<input type="submit" value="Add" id="submitpoi" class="add-poi-btn">
-							</form>
-						<% } %>
+							<% if(place) { %>
+								<form method="POST" action="/search/add-poi" class="addPoi">
+									<input type="hidden" name="name" value="<%= r.name %>">
+									<input type="hidden" name="categories" value="<%= r.categories[0].title %>">
+									<input type="hidden" name="rating" value="<%= r.rating %>">
+									<input type="hidden" name="numReviews" value="<%= r.review_count %>">	
+									<input type="hidden" name="url" value="<%= r.url %>">
+									<input type="hidden" name="image" value="<%= r.image_url %>">
+									<input type="hidden" name="placeId" value="<%= place.id %>" class="place-id-input">
+									<input type="submit" value="Add" id="submitpoi" class="add-poi-btn">
+								</form>
+							<% } %>
 			        </div>
 			      </div>
 			    <% }); %>
