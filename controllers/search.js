@@ -113,7 +113,7 @@ router.post('/add-poi', (req, res) => {
 			db.placeUser.findOne({
 				where: {
 					userId: req.user.id,
-					placeId: req.body.placeId
+					// placeId: req.body.placeId
 				}
 			})
 			.then((placeUser) => {

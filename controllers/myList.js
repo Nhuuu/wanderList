@@ -56,7 +56,7 @@ router.get('/show/:idx', loggedIn, (req, res) => {
 	})
 });
 
-
+// This one needs work
 // Delete route for points of interest from places from user. >>>
 router.delete('/delete-poi/:id', (req, res) => {
 	db.poi.destroy({
