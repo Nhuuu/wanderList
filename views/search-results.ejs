@@ -20,16 +20,16 @@
 			</ul>
 		</div>
 
-
+		<% if(place.user) { %>
 			<form method="POST" action="/search/add" id="addPlace">
 				<input type="hidden" name="description" value="<%= placeDetails.description %>">
 				<input type="hidden" name="lng" value="<%= latLng.lng %>">
 				<input type="hidden" name="lat" value="<%= latLng.lat %>">
 				<input type="hidden" name="image" value="https://maps.googleapis.com/maps/api/place/photo?photoreference=<%= photos[0].photo_reference%>&maxheight=300&maxwidth=300&key=AIzaSyAf_uDTwDISX-UHVrOefuGDvDBnxlylfCk">
 				<input type="hidden" name="userId" value="<%= user.id %>">
-				<input type="submit" value="ADD <%= placeDetails.description.toUpperCase() %> TO MY LIST!" class="add-place-btn">
+				<input type="submit" value="ADD <%= placeDetails.description.toUpperCase() %> TO MY LIST!" class="add-place-btn" id="submit-place">
 			</form>
-
+		<% } %>
 		<div>
 			<h5 class="header">Add attractions:</h5>
 			<div class="card-wrapper">

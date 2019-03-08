@@ -34,7 +34,8 @@ router.get('/results', loggedIn, (req, res) => {
 				})
 				.then((data) => {
 					db.place.findOne({
-						where: {description: placeDetails.description}
+						where: {description: placeDetails.description},
+						include: [db.user]
 					})
 					.then((place) => {
 						var results = data.jsonBody.businesses;
