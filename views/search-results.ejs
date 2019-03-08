@@ -10,13 +10,13 @@
 		<div class="slider">
 			<ul class="slides">
 				<% photos.forEach((img) => { %>
-				      <li>
-				        <img class="search-image" src="https://maps.googleapis.com/maps/api/place/photo?photoreference=<%= img.photo_reference%>&sensor=false&maxheight=300&maxwidth=300&key=AIzaSyAf_uDTwDISX-UHVrOefuGDvDBnxlylfCk">
-				        <div class="caption">
-				          <h3 class="place-name"><%= placeDetails.description %></h3>
-				        </div>
-				      </li>
-			  	<% }); %>
+					<li>
+						<img class="search-image" src="https://maps.googleapis.com/maps/api/place/photo?photoreference=<%= img.photo_reference%>&sensor=false&maxheight=300&maxwidth=300&key=AIzaSyAf_uDTwDISX-UHVrOefuGDvDBnxlylfCk">
+						<div class="caption">
+							<h3 class="place-name"><%= placeDetails.description %></h3>
+						</div>
+					</li>
+				<% }); %>
 			</ul>
 		</div>
 
@@ -34,41 +34,41 @@
 			<h5 class="header">Add attractions:</h5>
 			<div class="card-wrapper">
 				<% results.forEach((r) => { %>
-			      <div class="card card-left">
-			        <div class="card-image">
-			          <img class="card-img" src="<%= r.image_url %>" alt="Image of <%= r.name %> Coming Soon">
-			        </div>
-			        <div class="card-content">
-				      	<div class="card-left">
-							<strong>Name: </strong><%= r.name %>
+				<div class="card card-left">
+					<div class="card-image">
+						<img class="card-img" src="<%= r.image_url %>" alt="Image of <%= r.name %> Coming Soon">
+					</div>
+					<div class="card-content">
+						<div class="card-left">
+					<strong>Name: </strong><%= r.name %>
+				</div>
+					<div class="card-left">
+						<strong>Categories: </strong><%= r.categories[0].title %>			
+					</div>
+						<div class="card-left">
+							<strong>Rating: </strong><%= r.rating %>
 						</div>
 						<div class="card-left">
-					    	<strong>Categories: </strong><%= r.categories[0].title %>			
+							<strong>Number of Reviews: </strong><%= r.review_count %>
+						</div>					    
 						</div>
-					    <div class="card-left">
-					    	<strong>Rating: </strong><%= r.rating %>
-					    </div>
-					    <div class="card-left">
-					    	<strong>Number of Reviews: </strong><%= r.review_count %>
-					    </div>					    
-			        </div>
-			        <div class="card-action">
-				      <a href="<%= r.url %>">Go to the Website!</a>
-							<!-- <% if(place) { %> -->
-								<form method="POST" action="/search/add-poi" class="addPoi">
-									<input type="hidden" name="name" value="<%= r.name %>">
-									<input type="hidden" name="categories" value="<%= r.categories[0].title %>">
-									<input type="hidden" name="rating" value="<%= r.rating %>">
-									<input type="hidden" name="numReviews" value="<%= r.review_count %>">	
-									<input type="hidden" name="url" value="<%= r.url %>">
-									<input type="hidden" name="image" value="<%= r.image_url %>">
-									<input type="hidden" name="placeId" value="<%= place.id %>" class="place-id-input">
-									<input type="submit" value="Add" id="submitpoi" class="add-poi-btn">
-								</form>
-							<!-- <% } %> -->
-			        </div>
-			      </div>
-			    <% }); %>
+						<div class="card-action">
+						<a href="<%= r.url %>">Go to the Website!</a>
+						<!-- <% if(place) { %> -->
+							<form method="POST" action="/search/add-poi" class="addPoi">
+								<input type="hidden" name="name" value="<%= r.name %>">
+								<input type="hidden" name="categories" value="<%= r.categories[0].title %>">
+								<input type="hidden" name="rating" value="<%= r.rating %>">
+								<input type="hidden" name="numReviews" value="<%= r.review_count %>">	
+								<input type="hidden" name="url" value="<%= r.url %>">
+								<input type="hidden" name="image" value="<%= r.image_url %>">
+								<input type="hidden" name="placeId" value="<%= place.id %>" class="place-id-input">
+								<input type="submit" value="Add" id="submitpoi" class="add-poi-btn">
+							</form>
+						<!-- <% } %> -->
+						</div>
+					</div>
+				<% }); %>
 			</div>
 		</div>
 	<% } %>
