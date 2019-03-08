@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>WanderList</title>
 	<link rel="stylesheet" type="text/css" href="/style.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
@@ -11,46 +11,46 @@
 	<link href="https://fonts.googleapis.com/css?family=Caveat:700|Lobster|Raleway|Raleway+Dots|Shadows+Into+Light+Two|Vibur" rel="stylesheet">
 </head>
 <body>
-  	<nav>
-      <a href="/" class="left">wanderlist</a>
-      <ul>
-      	<% if(!user) { %>
-      		<li><a href="/auth/login">LOG IN</a></li>
-        	<li><a href="/auth/signup">SIGN UP</a></li>
-        <% } else { %>
-      		<li><a href="/search">SEARCH</a></li>
-      		<li><a href="/profile">PROFILE</a></li>
-      		<li><a href="/myList">MY LIST</li>
-      		<li><a href="/auth/logout">LOGOUT</a></li>
-      	<% } %>
-      </ul>
-  	</nav>
+	<nav>
+		<a href="/" class="left">wanderlist</a>
+		<ul>
+			<% if(!user) { %>
+				<li><a href="/auth/login">LOG IN</a></li>
+				<li><a href="/auth/signup">SIGN UP</a></li>
+			<% } else { %>
+				<li><a href="/search">SEARCH</a></li>
+				<li><a href="/profile">PROFILE</a></li>
+				<li><a href="/myList">MY LIST</li>
+				<li><a href="/auth/logout">LOGOUT</a></li>
+			<% } %>
+		</ul>
+	</nav>
 	<div class="main">
 		<% include partials/alerts %>
 		<%- body%>	
 	</div>	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<script>
-  		document.addEventListener('DOMContentLoaded', function() {
-    		var elems = document.querySelectorAll('.slider');
-    		var instances = M.Slider.init(elems);
-  		});
-      document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.datepicker');
-        var instances = M.Datepicker.init(elems, {
-          autoClose: true,
-          maxDate: new Date(),
-          yearRange: [1920, 2019]
-        });
-      });
+	document.addEventListener('DOMContentLoaded', function() {
+		var elems = document.querySelectorAll('.slider');
+		var instances = M.Slider.init(elems);
+	});
+	document.addEventListener('DOMContentLoaded', function() {
+		var elems = document.querySelectorAll('.datepicker');
+		var instances = M.Datepicker.init(elems, {
+			autoClose: true,
+			maxDate: new Date(),
+			yearRange: [1920, 2019]
+		});
+	});
 	</script>
 	<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-  <footer id="footer">
-  	<p id="footer-left"><i class="material-icons">copyright</i> 2019 Nhu Trinh</p>
-  	<p id="footer-right">Powered by <img id="yelp-logo" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/17089be275f0/assets/img/logos/logo_desktop_xsmall_outline.png"></p>
+	src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+	<footer id="footer">
+		<p id="footer-left"><i class="material-icons">copyright</i> 2019 Nhu Trinh</p>
+		<p id="footer-right">Powered by <img id="yelp-logo" src="https://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/17089be275f0/assets/img/logos/logo_desktop_xsmall_outline.png"></p>
 	</footer>
 </body>
 </html>
